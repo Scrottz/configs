@@ -10,9 +10,9 @@ cd "$current_pane_path" 2>/dev/null || exit 0
 # 3. Get the current branch name
 branch=$(git branch --show-current 2>/dev/null)
 
-# If not in a git repo, exit silently
+# If not in a git repo, output "none" and finish
 if [ -z "$branch" ]; then
-    echo ""
+    echo "none"
     exit 0
 fi
 
