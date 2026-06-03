@@ -1,0 +1,11 @@
+Status: active
+
+     To                         Action      From
+     --                         ------      ----
+[ 1] 22/tcp                     ALLOW IN    192.168.178.0/24          
+[ 2] 53/tcp                     ALLOW IN    192.168.178.0/24          
+[ 3] 53/udp                     ALLOW IN    192.168.178.0/24          
+[ 4] 3000/tcp                   ALLOW IN    192.168.178.0/24          
+[ 5] 53/tcp                     ALLOW IN    fdfa:54df:661d::/64       
+[ 6] 53/udp                     ALLOW IN    fdfa:54df:661d::/64       
+
