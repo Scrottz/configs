@@ -1,0 +1,4 @@
+# sofort alles vorschlagen und nicht erst nen Fehler-Pling
+set show-all-if-ambiguous on
+# zeigt den krempel sofort an und nicht erst "soll ich dir das wirklich zeigen? is ne ganze menge, dude"
+set completion-query-items 0
