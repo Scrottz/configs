@@ -1,4 +1,4 @@
-# Promot
+# Prompt
 PS1='\[\e[90m\][ \[\e[32m\]\u\[\e[90m\]@\[\e[1;32m\]\h \[\e[90m\]: \[\e[0;36m\]\w \[\e[90m\]]\n\[\e[1;32m\]❯ \[\e[0m\]'
 
 #tmux mainframe init
@@ -14,12 +14,10 @@ mainframe() {
         tmux split-window -v -t "$session"  
         tmux split-window -v -t "$session"
         
-        # Programme starten
         tmux send-keys -t "$session:0.0" 'clear' C-m
         tmux send-keys -t "$session:0.1" 'clear' C-m
         tmux send-keys -t "$session:0.2" 'htop' C-m
         tmux send-keys -t "$session:0.3" 'ncspot' C-m
-        # Pane 3 bleibt leer
         
         tmux select-pane -t "$session:0.0"
         tmux attach-session -t "$session"
@@ -38,4 +36,8 @@ alias audio='/usr/bin/pavucontrol &'
 #  ncport (spotify tui) snap instlation global path export
 export PATH="/snap/bin:$PATH"
 
-# llm aliase llm --version
+# nvim Path
+export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
+
+# kill ncpot (firsst cpu wie blööde manchmal)
+alias ncspot-kill="pkill -9 -f ncspot"
