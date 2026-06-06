@@ -53,7 +53,6 @@ opt.autoindent = true
 opt.backup = false
 opt.writebackup = false
 opt.swapfile = false
-opt.clipboard = "unnamedplus"
 
 -- ==========================================================================
 -- 6. COLORS & TERMINAL COMPATIBILITY

@@ -25,3 +25,7 @@ require("statusbar")
 
 -- 4. Plugin Management
 require("plugins")
+
+-- 5. FINAL OVERRIDES
+-- Ensures clipboard mapping still works after scrabmeling togehter all the other shit
+vim.opt.clipboard = "unnamedplus"
