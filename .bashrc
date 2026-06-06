@@ -41,3 +41,27 @@ export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 
 # kill ncpot (firsst cpu wie blööde manchmal)
 alias ncspot-kill="pkill -9 -f ncspot"
+
+# ssh to pi3
+alias ssh-pi3="ssh franz@192.168.178.2"
+
+
+# ==========================================================================
+# LLM CLI ALIASES (Shell-Integrated Version)
+# Nomenclature: 
+# q = Quick (Free), qp = Quick (Paid/Budget)
+# brain = Brain (Paid/Stable)
+# suffix 'c' = Continue last conversation (Stay in Shell)
+# ==========================================================================
+
+# QUICK - FREE (Risiko: 429)
+alias q="llm -m openrouter/google/gemma-4-26b-a4b-it:free"
+alias qc="llm -c -m openrouter/google/gemma-4-26b-a4b-it:free"
+
+# QUICK - PAID (Stabil, extrem günstig)
+alias qp="llm -m openrouter/anthropic/claude-3-haiku"
+alias qpc="llm -c -m openrouter/anthropic/claude-3-haiku"
+
+# BRAIN - PAID (Stabil, High-Intelligence)
+alias brain="llm -m openrouter/meta-llama/llama-3.3-70b-instruct"
+alias brainc="llm -c -m openrouter/meta-llama/llama-3.3-70b-instruct"
