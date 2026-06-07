@@ -1,9 +1,8 @@
 -- ==========================================================================
 -- NEOVIM MAIN ENTRY POINT
--- Order of execution is critical for performance and correct initialization.
+-- Initialize plugins, LSP, and core settings in correct order
 -- ==========================================================================
 
--- 1. BOOTSTRAPPING (Ensure lazy.nvim is available before loading plugins)
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
     vim.fn.system({
@@ -17,15 +16,36 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- 2. Core System Settings
+-- Load core configuration
 require("options")
-
--- 3. Native UI Components
-require("statusbar")
-
--- 4. Plugin Management
 require("plugins")
+require("lsp")
+require("statusbar")
+-- ==========================================================================
+-- NATIVE TREE-SITTER CONFIGURATION (Neovim 0.12+)
+-- No more nvim-treesitter plugin needed. Using core native API.
+-- ==========================================================================
 
--- 5. FINAL OVERRIDES
--- Ensures clipboard mapping still works after scrabmeling togehter all the other shit
+-- 1. Ensure Python parser is installed natively
+-- This replaces :TSInstall
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "python", "lua", "bash", "json", "yaml" },
+    callback = function(args)
+        local lang = vim.bo.filetype
+        -- Native 0.12 way to ensure parser is present
+        pcall(vim.treesitter.start) 
+    end,
+})
+
+-- 2. Force Highlighting for Python
+-- This ensures that the core Tree-sitter engine takes over from Regex
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "python",
+    callback = function()
+        vim.cmd("syntax off") -- Kill the "Green Mess" (Regex)
+        vim.treesitter.start() -- Start the "Modern" Highlighting
+    end,
+})
+-- System integration
 vim.opt.clipboard = "unnamedplus"
+vim.cmd("colorscheme gruvbox")

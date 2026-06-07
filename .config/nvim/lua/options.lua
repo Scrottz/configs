@@ -1,66 +1,75 @@
 -- ==========================================================================
--- 1. PERSISTENT UNDO
--- Objective: Retain change history even after closing a file. To avoid 
--- cluttering project directories, all undo files are isolated in a 
--- dedicated central directory.
+-- CORE NEOVIM OPTIONS & SETTINGS
+-- Essential configuration for editor behavior, search, indentation, and UI
 -- ==========================================================================
+
+-- LEADER KEY: Space as prefix for custom commands
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 local opt = vim.opt
 
+-- =========================================================================
+-- 1. PERSISTENT UNDO
+-- =========================================================================
+-- Enable undo history across sessions, stored in dedicated directory
 opt.undofile = true
 opt.undodir = vim.fn.expand("~/.config/nvim/undo")
 
--- ==========================================================================
+-- =========================================================================
 -- 2. VISUAL DISPLAY & NAVIGATION
--- Objective: Enhance code orientation without visual clutter.
--- 'backspace' is explicitly configured to override legacy Vi restrictions,
--- allowing deletion over line breaks and existing indents like modern editors.
--- ==========================================================================
+-- =========================================================================
+-- Show line numbers and cursor position for orientation
 opt.number = true
 opt.cursorline = true
 opt.ruler = true
+
+-- Allow backspace to work across line boundaries (modern editor behavior)
 opt.backspace = "indent,eol,start"
 
--- ==========================================================================
--- 3. SEARCH OPTIMIZATIONS
--- Objective: Fast and flexible search behavior.
--- Combining 'ignorecase' and 'smartcase' ensures searches are case-insensitive
--- by default, but automatically switch to exact-case matching as soon as 
--- an uppercase letter is typed.
--- ==========================================================================
+-- =========================================================================
+-- 3. SEARCH BEHAVIOR
+-- =========================================================================
+-- Highlight search matches and show results while typing
 opt.hlsearch = true
 opt.incsearch = true
+
+-- Smart case: ignore case unless uppercase letters are used
 opt.ignorecase = true
 opt.smartcase = true
 
--- ==========================================================================
--- 4. INDENTATION & TABS (PEP 8 & KISS Standard)
--- Objective: Consistent formatting, crucial for Python and config files 
--- (YAML/JSON). Tabs are strictly converted to spaces ('expandtab') to prevent
--- rendering discrepancies across different systems (e.g., GitHub, AWS).
--- ==========================================================================
+-- =========================================================================
+-- 4. INDENTATION (PEP 8 Compliant)
+-- =========================================================================
+-- Use spaces instead of tabs for consistency across systems
 opt.expandtab = true
 opt.tabstop = 4
 opt.shiftwidth = 4
 opt.autoindent = true
 
--- ==========================================================================
+-- =========================================================================
 -- 5. SYSTEM INTEGRATION & PERFORMANCE
--- Objective: Minimize disk write cycles (critical for older SSDs like the
--- ThinkPad T450s) and ensure smooth OS integration.
--- Disabling backup and swap files prevents constant background disk writes 
--- and keeps project roots clean. 'unnamedplus' links to the system clipboard.
--- ==========================================================================
+-- =========================================================================
+-- Prevent constant disk writes: disable backup and swap files
 opt.backup = false
 opt.writebackup = false
 opt.swapfile = false
 
--- ==========================================================================
--- 6. COLORS & TERMINAL COMPATIBILITY
--- Objective: Setup for modern color schemes.
--- 'termguicolors' enables 24-bit TrueColor, allowing Neovim to use precise
--- hex colors instead of downscaling them to the terminal's 256-color palette.
--- Highly recommended for modern Tmux configurations.
--- ==========================================================================
+-- System clipboard integration: yank/paste to system clipboard
+vim.opt.clipboard = "unnamedplus"
+
+-- =========================================================================
+-- 6. COLOR & TERMINAL SUPPORT
+-- =========================================================================
+-- 24-bit true color support for modern color schemes
 opt.background = "dark"
 opt.termguicolors = true
+
+-- =========================================================================
+-- 7. CODE FOLDING
+-- =========================================================================
+-- Indent-based folding: fold code blocks based on indentation level
+opt.foldmethod = "indent"
+opt.foldlevel = 99
+opt.foldenable = true
 
