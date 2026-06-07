@@ -29,7 +29,23 @@ require("lazy").setup({
         priority = 1000,
         -- We leave config empty because we use the native API in init.lua
     },
-
+    -- Fuzzy Finder: Fast file and symbol navigation
+    {
+        "ibhagwan/fzf-lua",
+        dependencies = { "nvim-lua/plenary.nvim" },
+        lazy = false,
+        config = function()
+            require("fzf-lua").setup({
+                winopts = {
+                    height = 0.85,
+                    width = 0.80,
+                    preview = {
+                        layout = "vertical",
+                    },
+                },
+            })
+        end,
+    },
     -- LSP Bridge
     {
         "neovim/nvim-lspconfig",

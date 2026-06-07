@@ -19,6 +19,7 @@ vim.opt.rtp:prepend(lazypath)
 -- Load core configuration
 require("options")
 require("plugins")
+require("keymappings")
 require("lsp")
 require("statusbar")
 -- ==========================================================================
@@ -46,6 +47,8 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.treesitter.start() -- Start the "Modern" Highlighting
     end,
 })
+
+
 -- System integration
 vim.opt.clipboard = "unnamedplus"
-vim.cmd("colorscheme gruvbox")
+vim.cmd("colorscheme onedark")
