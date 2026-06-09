@@ -5,7 +5,7 @@
 
 -- LEADER KEY: Space as prefix for custom commands
 vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+vim.g.maplocalleader = "\\"
 
 local opt = vim.opt
 
@@ -66,10 +66,21 @@ opt.background = "dark"
 opt.termguicolors = true
 
 -- =========================================================================
--- 7. CODE FOLDING
+-- 7. CODE FOLDING (Treesitter Powered)
 -- =========================================================================
--- Indent-based folding: fold code blocks based on indentation level
-opt.foldmethod = "indent"
-opt.foldlevel = 99
-opt.foldenable = true
+-- Use native Treesitter expressions to determine fold levels
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+
+-- Keep folds open by default when loading a file
+vim.opt.foldlevel = 99
+vim.opt.foldenable = true
+
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "python", "lua", "vim", "markdown", "yaml" },
+    callback = function()
+        pcall(vim.treesitter.start)
+    end,
+})
 

@@ -1,1 +1,3 @@
 .config/nvim/undo/
+.config/nvim/undo/*
+

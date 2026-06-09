@@ -40,7 +40,7 @@ keymap("n", "<leader>ff", function()
 end, { desc = "Find Files (Project Root)", silent = true })
 
 keymap("n", "<leader>fg", function()
-    local root = get_/project_root() -- FIX: removed //
+    local root = get_project_root()
     require('fzf-lua').live_grep({ cwd = root })
 end, { desc = "Live Grep (Project Root)", silent = true })
 
@@ -54,3 +54,21 @@ end, { desc = "Find Symbols (Project Root)", silent = true })
 -- 2. GENERAL UTILITIES
 keymap("n", "<leader>h", ":nohlsearch<CR>", { desc = "Clear search highlight", silent = true })
 
+
+-- Window Navigation (Fast switching between splits)
+vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left window" })
+vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Move to bottom window" })
+vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Move to top window" })
+vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to right window" })
+
+
+-- Diagnostics (Spell/Grammarcheck)
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
+vim.keymap.set('n', 'gl', vim.diagnostic.open_float, { desc = "Show diagnostic details" })
+
+-- Toggle fold under cursor (Opens if closed, Closes if open)
+vim.keymap.set("n", "<leader>z", "za", { desc = "Toggle fold under cursor" })
+
+-- Fold only the current block/method (Uses Treesitter scope if available)
+vim.keymap.set("n", "zc", "zC", { desc = "Fold current block only" })
