@@ -16,15 +16,13 @@ local opt = vim.opt
 opt.undofile = true
 opt.undodir = vim.fn.expand("~/.config/nvim/undo")
 
+
 -- =========================================================================
 -- 2. VISUAL DISPLAY & NAVIGATION
 -- =========================================================================
--- Show line numbers and cursor position for orientation
 opt.number = true
 opt.cursorline = true
 opt.ruler = true
-
--- Allow backspace to work across line boundaries (modern editor behavior)
 opt.backspace = "indent,eol,start"
 
 -- =========================================================================
@@ -76,11 +74,9 @@ vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldlevel = 99
 vim.opt.foldenable = true
 
-
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { "python", "lua", "vim", "markdown", "yaml" },
     callback = function()
         pcall(vim.treesitter.start)
     end,
 })
-

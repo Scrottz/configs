@@ -1,0 +1,29 @@
+line-length = 88
+target-version = "py312"
+
+[lint]
+# E: Pycodestyle (PEP8)
+# F: Pyflakes (Bugs)
+# I: Isort (Imports)
+# UP: Pyupgrade (Moderne Syntax)
+# PL: Pylint (Strenge Checks)
+# B: Bugbear (Logik-Fehler finden)
+select = [
+    "E",    # Pycodestyle
+    "F",    # Pyflakes
+    "I",    # Isort
+    "UP",   # Pyupgrade
+    "PL",   # Pylint
+    "B",    # Bugbear
+    "W",    # Warnings
+]
+
+# Einige Pylint-Regeln sind extrem nervig, die ignorieren wir:
+ignore = [
+    "PLR0913", # Zu viele Argumente in einer Funktion
+    "PLR2004", # Magische Zahlen im Code (erlaubt)
+]
+
+[format]
+quote-style = "double"
+indent-style = "space"
