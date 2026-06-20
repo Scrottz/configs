@@ -1,0 +1,24 @@
+# --- Neovim / Editor ---
+.config/nvim/undo/
+.config/nvim/shada/
+*.swp
+*.swo
+
+# --- Shell ---
+.bash_history
+.zsh_history
+.python_history
+.lesshst
+
+# --- Tmux ---
+.tmux/resurrect/
+
+# --- Htop ---
+.config/htop/htoprc.tmp
+
+# --- System & Sonstiges ---
+Desktop/              
+Downloads/
+.cache/               
+.local/share/Trash/
+.local/share/nvim/   
