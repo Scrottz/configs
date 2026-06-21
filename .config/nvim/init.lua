@@ -23,7 +23,7 @@ require("lazy").setup({
 require("keymappings")
 require("lsp")
 require("statusbar")
-
+require("autocmd")
 -- =========================================================================
 -- FINAL UI OVERRIDES
 -- Enforce settings to prevent plugin overrides

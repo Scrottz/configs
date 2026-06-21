@@ -55,8 +55,8 @@ alias ssh-pi3="ssh franz@192.168.178.2"
 # ==========================================================================
 
 # QUICK - FREE (Risiko: 429)
-alias q="llm -m openrouter/google/gemma-4-26b-a4b-it:free"
-alias qc="llm -c -m openrouter/google/gemma-4-26b-a4b-it:free"
+alias q="llm -m gemini/gemini-3.1-flash-lite" 
+alias qc="llm -c -m  gemini/gemini-3.1-flash-lite"
 
 # QUICK - PAID (Stabil, extrem günstig)
 alias qp="llm -m openrouter/anthropic/claude-3-haiku"
