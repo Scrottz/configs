@@ -23,13 +23,11 @@ require("lazy").setup({
 require("keymappings")
 require("lsp")
 require("statusbar")
-require("autocmd")
+
 -- =========================================================================
 -- FINAL UI OVERRIDES
 -- Enforce settings to prevent plugin overrides
 -- =========================================================================
-vim.opt.number = true
-vim.opt.relativenumber = false
 vim.opt.clipboard = "unnamedplus"
 
 vim.diagnostic.config({

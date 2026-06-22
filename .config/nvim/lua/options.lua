@@ -20,11 +20,35 @@ opt.undodir = vim.fn.expand("~/.config/nvim/undo")
 -- =========================================================================
 -- 2. VISUAL DISPLAY & NAVIGATION
 -- =========================================================================
+
+-- Standard: Absolute numbers
 opt.number = true
+opt.relativenumber = false
+
+-- Autocmds: Switch between absolute and relative based on mode/focus
+local number_group = vim.api.nvim_create_augroup("NumberToggle", { clear = true })
+
+-- When leaving insert mode or entering the buffer, show relative numbers
+vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "InsertLeave" }, {
+    group = number_group,
+    callback = function()
+        if vim.api.nvim_get_mode().mode ~= "i" then
+            opt.relativenumber = true
+        end
+    end,
+})
+
+-- When entering insert mode or leaving the buffer, show absolute numbers
+vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter" }, {
+    group = number_group,
+    callback = function()
+        opt.relativenumber = false
+    end,
+})
+
 opt.cursorline = true
 opt.ruler = true
 opt.backspace = "indent,eol,start"
-
 -- =========================================================================
 -- 3. SEARCH BEHAVIOR
 -- =========================================================================
