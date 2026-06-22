@@ -1,0 +1,9 @@
+
+# --- Basic Settings ---
+set editor = "nvim"
+set realname = "Franz Keilholz"
+set folder = "~/Mail"
+set spoolfile = "+posteo/INBOX"
+
+# --- Mailbox Configuration ---
+mailboxes +posteo/INBOX +main/INBOX +spam/INBOX +github/INBOX
