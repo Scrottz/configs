@@ -1,13 +1,4 @@
 return {
-    -- 1. mini.pairs: Automatic bracket pairing
-    {
-        "echasnovski/mini.pairs",
-        version = false,
-        event = "InsertEnter",
-        config = function()
-            require("mini.pairs").setup()
-        end,
-    },
     -- 2. mini.comment: Fast commenting with 'gc'
     {
         "echasnovski/mini.comment",

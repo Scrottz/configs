@@ -49,3 +49,9 @@ vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.jump({count = 1, float = true
 -- Folding
 keymap("n", "<leader>z", "za", { desc = "Toggle fold" })
 keymap("n", "zc", "zC", { desc = "Fold current block" })
+
+--- Panel Navigation
+vim.keymap.set('n', '<A-h>', '<C-w>h')
+vim.keymap.set('n', '<A-j>', '<C-w>j')
+vim.keymap.set('n', '<A-k>', '<C-w>k')
+vim.keymap.set('n', '<A-l>', '<C-w>l')
