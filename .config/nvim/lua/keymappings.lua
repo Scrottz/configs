@@ -6,6 +6,7 @@ local keymap = vim.keymap.set
 
 -- 1. LSP MAPPINGS (Now global, active whenever an LSP is attached)
 keymap("n", "gd", vim.lsp.buf.definition, { desc = "LSP Go to Definition", silent = true })
+keymap("n", "gu", vim.lsp.buf.references, { desc = "LSP Go to References", silent = true })
 keymap("n", "K", vim.lsp.buf.hover, { desc = "LSP Hover", silent = true })
 keymap("n", "<leader>rn", vim.lsp.buf.rename, { desc = "LSP Rename Symbol", silent = true })
 keymap("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP Code Action", silent = true })
@@ -55,3 +56,4 @@ vim.keymap.set('n', '<A-h>', '<C-w>h')
 vim.keymap.set('n', '<A-j>', '<C-w>j')
 vim.keymap.set('n', '<A-k>', '<C-w>k')
 vim.keymap.set('n', '<A-l>', '<C-w>l')
+

@@ -58,6 +58,9 @@ alias ssh-pi3="ssh franz@192.168.178.2"
 alias q="llm -m gemini/gemini-3.1-flash-lite" 
 alias qc="llm -c -m  gemini/gemini-3.1-flash-lite"
 
+# alias q="llm -m gemini/gemini-2.5-flash"
+# alias qc="llm -c -m gemini/gemini-2.5-flash"
+
 # QUICK - PAID (Stabil, extrem günstig)
 alias qp="llm -m openrouter/anthropic/claude-3-haiku"
 alias qpc="llm -c -m openrouter/anthropic/claude-3-haiku"
@@ -65,3 +68,7 @@ alias qpc="llm -c -m openrouter/anthropic/claude-3-haiku"
 # BRAIN - PAID (Stabil, High-Intelligence)
 alias brain="llm -m openrouter/meta-llama/llama-3.3-70b-instruct"
 alias brainc="llm -c -m openrouter/meta-llama/llama-3.3-70b-instruct"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
