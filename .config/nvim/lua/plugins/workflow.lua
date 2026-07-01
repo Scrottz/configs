@@ -42,4 +42,37 @@ return {
             require("mini.icons").mock_nvim_web_devicons()
         end,
     },
+    {
+        "folke/trouble.nvim",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+        opts = {}, -- Lädt mit Standardeinstellungen
+        keys = {
+            -- Mapping: Leader + xx öffnet die Fehlerliste
+            { "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Toggle Diagnostics (Trouble)" },
+            -- Mapping: Leader + xq öffnet die Quickfix-Liste
+            { "<leader>xq", "<cmd>Trouble qflist toggle<cr>", desc = "Toggle Quickfix List" },
+        },
+    },
+    {
+        "petertriho/nvim-scrollbar",
+        lazy = false,
+        dependencies = { "lewis6991/gitsigns.nvim" },
+        config = function()
+          require("scrollbar").setup({
+            show = true,
+            handle = {
+              show = true,
+              color = "#808080", -- Farbe des Sliders (oder nutze Highlights)
+              gitsigns = true,
+            },
+            excluded_filetypes = {
+              "prompt",
+              "TelescopePrompt",
+              "noice",
+              "NvimTree",
+            },
+          })
+        end
+    },
+
 }

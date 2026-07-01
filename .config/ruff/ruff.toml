@@ -21,7 +21,7 @@ select = [
 # Einige Pylint-Regeln sind extrem nervig, die ignorieren wir:
 ignore = [
     "PLR0913", # Zu viele Argumente in einer Funktion
-    "PLR2004", # Magische Zahlen im Code (erlaubt)
+    "E501", # Ignoire Line too long
 ]
 
 [format]
