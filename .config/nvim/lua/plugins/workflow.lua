@@ -14,7 +14,11 @@ return {
         event = "VeryLazy",
         config = function()
             require("which-key").setup({
-                -- Setup is automatic, just loading it is enough
+                plugins = {
+                    spelling = {
+                        enabled = true, -- Enable spelling suggestions in the menu
+                    },
+                },
             })
         end,
     },
@@ -60,10 +64,13 @@ return {
         config = function()
           require("scrollbar").setup({
             show = true,
+            handlers = {
+              gitsigns = true,
+              diagnostic = true, -- Für die Fehler/Warnungen
+            },
             handle = {
               show = true,
-              color = "#808080", -- Farbe des Sliders (oder nutze Highlights)
-              gitsigns = true,
+              color = "#808080", -- Dein grauer Slider
             },
             excluded_filetypes = {
               "prompt",
@@ -74,5 +81,4 @@ return {
           })
         end
     },
-
 }
