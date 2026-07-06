@@ -5,26 +5,28 @@
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 -- Register configurations without enabling them immediately
+
 vim.lsp.config("pyright", {
-    cmd = { "pyright-langserver", "--stdio" },
-    root_dir = vim.fs.dirname(vim.fs.find({ ".git", "pyproject.toml" }, { upward = true })[1]),
-    capabilities = capabilities,
-    settings = { python = { analysis = { autoSearchPaths = true, useLibraryCodeForTypes = true } } }
+    cmd = { "/usr/local/bin/pyright-langserver", "--stdio" },
+    root_markers = { ".git", "pyproject.toml" },
+    capabilities = vim.lsp.protocol.make_client_capabilities(),
+    settings = {
+        python = {
+            analysis = {
+                autoSearchPaths = true,
+                useLibraryCodeForTypes = true,
+            },
+        },
+    },
 })
 
 vim.lsp.config("ruff", {
-    cmd = { "ruff", "server", "--config", vim.fn.expand("~/.config/ruff/ruff.toml") },
-    capabilities = capabilities,
-    root_dir = vim.fs.dirname(vim.fs.find({ ".git", "pyproject.toml" }, { upward = true })[1]),
+    cmd = { "/home/keilholz/.local/bin/ruff", "server" },
+    root_markers = { "pyproject.toml", "ruff.toml", ".git" },
 })
 
--- Enable servers ONLY for Python files
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = "python",
-    callback = function()
-        vim.lsp.enable({ "pyright", "ruff" })
-    end,
-})
+vim.lsp.enable("pyright", { "python" })
+vim.lsp.enable("ruff", { "python" })
 
 -- Dynamic venv injection
 vim.api.nvim_create_autocmd("LspAttach", {

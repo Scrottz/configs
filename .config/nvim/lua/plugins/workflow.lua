@@ -81,4 +81,8 @@ return {
           })
         end
     },
+    {
+        "neovim/nvim-lspconfig",
+        lazy = false,
+    }
 }

@@ -95,3 +95,4 @@ bind pager u half-up
 bind index,pager q exit
 
 bind index,pager <F2> next-unread-mailbox
+macro index,pager v "<pipe-message>nvim -R -c 'set ft=mail | set buftype=nofile | set noswapfile' -<enter>" "View in nvim"
