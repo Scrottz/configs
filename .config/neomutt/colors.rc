@@ -1,0 +1,5 @@
+color normal     green default
+color status     black green
+color error      red default
+color message    yellow default
+color indicator  black cyan
