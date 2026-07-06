@@ -45,7 +45,8 @@ alias ncspot-kill="pkill -9 -f ncspot"
 # ssh to pi3
 alias ssh-pi3="ssh franz@192.168.178.2"
 
-
+# go path
+export PATH=$PATH:$(go env GOPATH)/bin
 # ==========================================================================
 # LLM CLI ALIASES (Shell-Integrated Version)
 # Nomenclature: 
