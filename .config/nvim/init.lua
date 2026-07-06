@@ -9,8 +9,8 @@ vim.g.maplocalleader = "\\"
 -- Ensure Git is found and configured correctly for lazy.nvim
 -- By explicitly setting clone_method and disabling terminal prompts
 vim.g.lazy_git_config = {
-    clone_method = "ssh", -- Use SSH for cloning plugins
-    git_executable = "/usr/bin/git",
+	clone_method = "ssh", -- Use SSH for cloning plugins
+	git_executable = "/usr/bin/git",
 }
 vim.env.GIT_TERMINAL_PROMPT = "0" -- Disable Git terminal prompts
 
@@ -28,21 +28,24 @@ require("options")
 -- Initialize lazy.nvim plugin manager
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-    -- Clone lazy.nvim using SSH
-    vim.fn.system({
-        "git", "clone", "--filter=blob:none",
-        "ssh://git@github.com/folke/lazy.nvim.git",
-        "--branch=stable", lazypath
-    })
+	-- Clone lazy.nvim using SSH
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"ssh://git@github.com/folke/lazy.nvim.git",
+		"--branch=stable",
+		lazypath,
+	})
 end
 vim.opt.rtp:prepend(lazypath) -- Add lazy.nvim to runtimepath
 
 -- Load plugins from the 'plugins' directory
 require("lazy").setup({
-    spec = { { import = "plugins" } },
-    defaults = { lazy = true },
-    -- Optionally, configure rocks if needed, but it's not the cause of the git error
-    -- rocks = { enabled = false },
+	spec = { { import = "plugins" } },
+	defaults = { lazy = true },
+	-- Optionally, configure rocks if needed, but it's not the cause of the git error
+	-- rocks = { enabled = false },
 })
 
 -- =========================================================================
@@ -50,8 +53,8 @@ require("lazy").setup({
 -- Load other modules and enforce critical settings after plugins initialize.
 -- =========================================================================
 require("keymappings") -- Load custom keybindings
-require("lsp")         -- Load LSP configuration
-require("statusbar")   -- Load statusline configuration (if any)
+require("lsp") -- Load LSP configuration
+-- require("statusbar") -- Load statusline configuration (if any)
 
 -- Enforce UI settings to prevent plugin overrides
 vim.opt.number = true
@@ -60,9 +63,9 @@ vim.opt.clipboard = "unnamedplus"
 
 -- Configure diagnostics display: signs, underlines, hide virtual text
 vim.diagnostic.config({
-    virtual_text = false,
-    signs = true,
-    underline = true,
+	virtual_text = false,
+	signs = true,
+	underline = true,
 })
 
 -- Set colorscheme and ColorColumn (vertical line)

@@ -1,4 +1,3 @@
-
 -- ==========================================================================
 -- KEYMAPS CONFIGURATION
 -- ==========================================================================
@@ -13,26 +12,34 @@ keymap("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP Code Action", s
 
 -- 2. FUZZY FINDER (Wrapped in pcall to prevent errors if plugin is lazy-loading)
 local function get_project_root()
-    local path = vim.api.nvim_buf_get_name(0)
-    if path == "" then return vim.fn.getcwd() end
-    local current_dir = vim.fn.fnamemodify(path, ":h")
-    local home_dir = vim.loop.os_homedir()
+	local path = vim.api.nvim_buf_get_name(0)
+	if path == "" then
+		return vim.fn.getcwd()
+	end
+	local current_dir = vim.fn.fnamemodify(path, ":h")
+	local home_dir = vim.loop.os_homedir()
 
-    while current_dir ~= "" and current_dir ~= home_dir do
-        local git_stat = vim.loop.fs_stat(current_dir .. "/.git")
-        local pyproj_stat = vim.loop.fs_stat(current_dir .. "/pyproject.toml")
-        if (git_stat and git_stat.type == "directory") or (pyproj_stat and pyproj_stat.type == "file") then
-            return current_dir
-        end
-        current_dir = vim.fn.fnamemodify(current_dir, ":h")
-    end
-    return vim.fn.fnamemodify(path, ":h")
+	while current_dir ~= "" and current_dir ~= home_dir do
+		local git_stat = vim.loop.fs_stat(current_dir .. "/.git")
+		local pyproj_stat = vim.loop.fs_stat(current_dir .. "/pyproject.toml")
+		if (git_stat and git_stat.type == "directory") or (pyproj_stat and pyproj_stat.type == "file") then
+			return current_dir
+		end
+		current_dir = vim.fn.fnamemodify(current_dir, ":h")
+	end
+	return vim.fn.fnamemodify(path, ":h")
 end
 
-keymap("n", "<leader>ff", function() require('fzf-lua').files({ cwd = get_project_root() }) end, { desc = "Find Files", silent = true })
-keymap("n", "<leader>fg", function() require('fzf-lua').live_grep({ cwd = get_project_root() }) end, { desc = "Live Grep", silent = true })
+keymap("n", "<leader>ff", function()
+	require("fzf-lua").files({ cwd = get_project_root() })
+end, { desc = "Find Files", silent = true })
+keymap("n", "<leader>fg", function()
+	require("fzf-lua").live_grep({ cwd = get_project_root() })
+end, { desc = "Live Grep", silent = true })
 keymap("n", "<leader>fs", "<cmd>FzfLua lsp_document_symbols<cr>", { desc = "Find Symbols (File)", silent = true })
-keymap("n", "<leader>fS", function() require('fzf-lua').lsp_workspace_symbols({ cwd = get_project_root() }) end, { desc = "Find Symbols (Root)", silent = true })
+keymap("n", "<leader>fS", function()
+	require("fzf-lua").lsp_workspace_symbols({ cwd = get_project_root() })
+end, { desc = "Find Symbols (Root)", silent = true })
 
 -- 3. GENERAL UTILITIES
 keymap("n", "<leader>h", ":nohlsearch<CR>", { desc = "Clear search", silent = true })
@@ -44,16 +51,48 @@ keymap("n", "<C-k>", "<C-w>k", { desc = "Move up" })
 keymap("n", "<C-l>", "<C-w>l", { desc = "Move right" })
 
 -- Diagnostics
-vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.jump({count = -1, float = true})<CR>', { desc = "Jump to previous diagnostic" })
-vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.jump({count = 1, float = true})<CR>', { desc = "Jump to next diagnostic" })
+vim.keymap.set(
+	"n",
+	"[d",
+	"<cmd>lua vim.diagnostic.jump({count = -1, float = true})<CR>",
+	{ desc = "Jump to previous diagnostic" }
+)
+vim.keymap.set(
+	"n",
+	"]d",
+	"<cmd>lua vim.diagnostic.jump({count = 1, float = true})<CR>",
+	{ desc = "Jump to next diagnostic" }
+)
 
 -- Folding
 keymap("n", "<leader>z", "za", { desc = "Toggle fold" })
 keymap("n", "zc", "zC", { desc = "Fold current block" })
 
 --- Panel Navigation
-vim.keymap.set('n', '<A-h>', '<C-w>h')
-vim.keymap.set('n', '<A-j>', '<C-w>j')
-vim.keymap.set('n', '<A-k>', '<C-w>k')
-vim.keymap.set('n', '<A-l>', '<C-w>l')
+vim.keymap.set("n", "<A-h>", "<C-w>h")
+vim.keymap.set("n", "<A-j>", "<C-w>j")
+vim.keymap.set("n", "<A-k>", "<C-w>k")
+vim.keymap.set("n", "<A-l>", "<C-w>l")
 
+--- Oil keymapping (maipulate filesystem like an text editor)
+vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+
+-- Debugging Keymaps (DAP)
+vim.keymap.set("n", "<leader>db", function()
+	require("dap").toggle_breakpoint()
+end, { desc = "Debug: Toggle Breakpoint" })
+vim.keymap.set("n", "<leader>dc", function()
+	require("dap").continue()
+end, { desc = "Debug: Start/Continue" })
+vim.keymap.set("n", "<leader>dn", function()
+	require("dap").step_over()
+end, { desc = "Debug: Step Over" })
+vim.keymap.set("n", "<leader>di", function()
+	require("dap").step_into()
+end, { desc = "Debug: Step Into" })
+vim.keymap.set("n", "<leader>du", function()
+	require("dapui").toggle()
+end, { desc = "Debug: Toggle UI" })
+
+-- Venv Selector
+vim.keymap.set("n", "<leader>vs", "<cmd>VenvSelect<cr>", { desc = "Python: Select VirtualEnv" })

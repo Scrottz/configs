@@ -1,0 +1,31 @@
+
+Failed to run `config` for nvim-dap
+
+/home/keilholz/.config/nvim/lua/plugins/python.lua:12: module 'dap-ui' not found:
+        no field package.preload['dap-ui']
+        cache_loader: module 'dap-ui' not found
+        cache_loader_lib: module 'dap-ui' not found
+        no file './dap-ui.lua'
+        no file '/usr/share/luajit-2.1/dap-ui.lua'
+        no file '/usr/local/share/lua/5.1/dap-ui.lua'
+        no file '/usr/local/share/lua/5.1/dap-ui/init.lua'
+        no file '/usr/share/lua/5.1/dap-ui.lua'
+        no file '/usr/share/lua/5.1/dap-ui/init.lua'
+        no file '/home/keilholz/.local/share/nvim/lazy-rocks/telescope.nvim/share/lua/5.1/dap-ui.lua'
+        no file '/home/keilholz/.local/share/nvim/lazy-rocks/telescope.nvim/share/lua/5.1/dap-ui/init.lua'
+
+        no file '/home/keilholz/.local/share/nvim/lazy-rocks/nvim-dap-python/share/lua/5.1/dap-ui.lua'
+        no file '/home/keilholz/.local/share/nvim/lazy-rocks/nvim-dap-python/share/lua/5.1/dap-ui/init.lua
+'
+        no file './dap-ui.so'
+        no file '/usr/local/lib/lua/5.1/dap-ui.so'
+        no file '/usr/lib/x86_64-linux-gnu/lua/5.1/dap-ui.so'
+        no file '/usr/local/lib/lua/5.1/loadall.so'
+        no file '/home/keilholz/.local/share/nvim/lazy-rocks/telescope.nvim/lib/lua/5.1/dap-ui.so'
+        no file '/home/keilholz/.local/share/nvim/lazy-rocks/telescope.nvim/lib64/lua/5.1/dap-ui.so'
+        no file '/home/keilholz/.local/share/nvim/lazy-rocks/nvim-dap-python/lib/lua/5.1/dap-ui.so'
+        no file '/home/keilholz/.local/share/nvim/lazy-rocks/nvim-dap-python/lib64/lua/5.1/dap-ui.so'
+
+# stacktrace:
+  - lua/plugins/python.lua:12 _in_ **config**
+  - lua/keymappings.lua:82
