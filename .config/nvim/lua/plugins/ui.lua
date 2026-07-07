@@ -15,27 +15,82 @@ return {
 			require("lualine").setup({
 				options = {
 					theme = "onedark",
-					icons_enabled = true,
-					component_separators = { left = "│", right = "│" },
+					component_separators = { left = "", right = "" },
 					section_separators = { left = "", right = "" },
+					globalstatus = true,
 				},
 				sections = {
+					lualine_a = { "mode" },
+					lualine_b = { "branch" },
 					lualine_c = {
 						"filename",
-						{ "diagnostics", sources = { "nvim_lsp" } },
-					},
-					lualine_x = {
 						{
 							function()
-								-- Sicherheitscheck, ob venv-selector überhaupt geladen ist
-								local ok, venv = pcall(require, "venv-selector")
-								return ok and venv.get_active_venv() or "No Venv"
+								local navic = require("nvim-navic")
+								if navic.is_available() then
+									return navic.get_location()
+								else
+									return ""
+								end
+							end,
+							cond = function()
+								return require("nvim-navic").is_available()
 							end,
 						},
-						"encoding",
-						"filetype",
 					},
+					lualine_x = {
+						-- Diagnostics hier in X, damit sie genug Platz haben
+						{
+							"diagnostics",
+							sources = { "nvim_diagnostic", "nvim_lsp" },
+
+							-- Displays diagnostics for the defined severity types
+							sections = { "warn", "error", "info", "hint" },
+
+							diagnostics_color = {
+								-- Same values as the general color option can be used here.
+								error = "DiagnosticError", -- Changes diagnostics' error color.
+								warn = "DiagnosticWarn", -- Changes diagnostics' warn color.
+								info = "DiagnosticInfo", -- Changes diagnostics' info color.
+								hint = "DiagnosticHint", -- Changes diagnostics' hint color.
+							},
+							symbols = { error = "", warn = "", info = "I", hint = "H" },
+							colored = true, -- Displays diagnostics status in color if set to true.
+							update_in_insert = false, -- Update diagnostics in insert mode.
+							always_visible = false,
+							colored = true, -- Das aktiviert das automatische Coloring basierend auf deinem Theme
+						},
+						"encoding",
+
+						{
+							"filetype",
+							icon_only = true,
+							colored = true,
+						},
+					},
+					lualine_y = {
+						-- Venv Symbol hier in Y
+						{
+							function()
+								local venv = vim.env.VIRTUAL_ENV
+								return venv and "" or ""
+							end,
+							color = { fg = "#98c379", gui = "bold" },
+						},
+					},
+					lualine_z = { "location" },
 				},
+			})
+		end,
+	},
+
+	{
+		"SmiteshP/nvim-navic",
+		dependencies = { "neovim/nvim-lspconfig" },
+		config = function()
+			require("nvim-navic").setup({
+				lsp = { auto_attach = true },
+				highlight = true,
 			})
 		end,
 	},
