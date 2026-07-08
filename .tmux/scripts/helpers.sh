@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 PATH="/usr/local/bin:$PATH:/usr/sbin"
 
 get_tmux_option() {

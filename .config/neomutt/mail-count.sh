@@ -11,11 +11,11 @@ m=$(count_new "$MAIL_ROOT/main/INBOX")
 s=$(count_new "$MAIL_ROOT/spam/INBOX")
 g=$(count_new "$MAIL_ROOT/github/INBOX")
 
-out=""
-[ "$p" -gt 0 ] && out="${out}P:$p "
-[ "$m" -gt 0 ] && out="${out}M:$m "
-[ "$s" -gt 0 ] && out="${out}S:$s "
-[ "$g" -gt 0 ] && out="${out}G:$g "
+out="¯\_(ツ)_/¯"
+[ "$p" -gt 0 ] && out="${out}󰇮 Posteo: $p "
+[ "$m" -gt 0 ] && out="${out}󰇮 Main: $m "
+[ "$s" -gt 0 ] && out="${out}󰇮 Spam: $s "
+[ "$g" -gt 0 ] && out="${out}󰇮 Github: $g "
 
 # Output only if there is something to report
 echo "$out"

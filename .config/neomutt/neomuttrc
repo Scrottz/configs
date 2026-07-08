@@ -29,26 +29,27 @@ folder-hook '~/mail/posteo/*' ' \
     set record = "+posteo/Sent"; \
     set sendmail = "/usr/bin/msmtp -a posteo"; \
     set pgp_sign_as = "DB7201085C516B313F4B596F4AC6728E8FA2C883"; \
-    set pgp_autosign = yes'; \
+    set pgp_autosign = yes; \
     set signature = "~/code/email_signatur/signatur_posteo.txt"'
 
-folder-hook '~/mail/main/*'    ' \
+folder-hook '~/mail/main/*' ' \
     set from = "Franz Keilholz <franz@keilholz.biz>"; \
-    set record = "+main/Sent"; \
+    set record = "+main/Gesendet"; \
     set sendmail = "/usr/bin/msmtp -a allinkl"; \
     set pgp_sign_as = "1F8A6479AAB3FD2A2895A50EA60EF9B74F4FF43E"; \
-    set pgp_autosign = yes'; \
+    set pgp_autosign = yes; \
     set signature = "~/code/email_signatur/signatur_biz.txt"'
+
 
 folder-hook '~/mail/spam/*'    ' \
     set from = "spam@keilholz.biz"; \
-    set record = "+spam/Sent"; \
+    set record = "+spam/Gesendet"; \
     set sendmail = "/usr/bin/msmtp -a allinkl"; \
     set pgp_autosign = no'
 
 folder-hook '~/mail/github/*'  ' \
     set from = "github@keilholz.biz"; \
-    set record = "+github/Sent"; \
+    set record = "+github/Gesendet"; \
     set sendmail = "/usr/bin/msmtp -a allinkl"; \
     set pgp_autosign = yes'
 
