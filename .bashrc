@@ -29,6 +29,9 @@ mainframe() {
 # neue files adden mit: dotfiles add PATH
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
+# alias for quick config editing
+alias cfg='cd ~/.config && nvim .'
+
 # alias für pavucontrol
 alias audio='/usr/bin/pavucontrol &'
 . "$HOME/.cargo/env"
