@@ -13,6 +13,7 @@ set wait_key = no
 set menu_scroll = yes
 set tilde = yes
 set beep_new = yes
+set mailcap_path = ~/.mailcap
 
 # Signature configuration
 set sig_dashes = yes
@@ -97,3 +98,7 @@ bind index,pager q exit
 
 bind index,pager <F2> next-unread-mailbox
 macro index,pager v "<pipe-message>nvim -R -c 'set ft=mail | set buftype=nofile | set noswapfile' -<enter>" "View in nvim"
+
+auto_view text/html
+alternative_order text/plain text/enriched text/html
+
