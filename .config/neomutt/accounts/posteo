@@ -1,0 +1,20 @@
+# --- Posteo Identity Configuration ---
+
+# Sender identification
+set from = "Franz Keilholz <franz.keilholz@posteo.de>"
+
+# Path for sent messages (folder must exist in your maildir)
+set record = "+posteo/Sent"
+
+# SMTP settings for this specific account
+set sendmail = "/usr/bin/msmtp -a posteo"
+
+# PGP settings: Opt-in only, we don't force signing globally
+# Only set your specific key for signing here
+set pgp_sign_as = "DB7201085C516B313F4B596F4AC6728E8FA2C883"
+unset pgp_autosign
+unset pgp_autoencrypt
+
+# Account specific signature file
+set signature = "~/code/email_signatur/signatur_posteo.txt"
+

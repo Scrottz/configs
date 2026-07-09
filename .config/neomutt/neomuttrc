@@ -1,104 +1,98 @@
-# --- 1. Basic Settings ---
+# --- 1. Global Settings ---
+set mbox_type = Maildir
+set folder = "~/mail"
+set spoolfile = "+posteo/INBOX"
 set header_cache_backend = "lmdb"
 set header_cache = "~/.cache/neomutt/hcache"
-source "~/.config/neomutt/colors.rc"
 set editor = "nvim"
-set realname = "Franz Keilholz"
-set folder = "~/mail"
-set mbox_type = Maildir
-set spoolfile = "+posteo/INBOX"
-set mail_check = 60
-set sendmail = "/usr/bin/msmtp"
 set wait_key = no
-set menu_scroll = yes
-set tilde = yes
-set beep_new = yes
-set mailcap_path = ~/.mailcap
+source "~/.config/neomutt/colors.rc"
 
-# Signature configuration
-set sig_dashes = yes
+# --- 2. Workflow & Sync ---
+# Sync on startup (Background process)
+push "<shell-escape>~/.config/neomutt/sync-mail.sh &<enter>"
 
-# --- 2. Mailbox Configuration ---
-mailboxes +posteo/INBOX +main/INBOX +spam/INBOX +github/INBOX
+# Disable automatic background checks to avoid conflicts with sync-mail.sh
+set mail_check = 0
+set beep_new = no
 
-# --- 3. Identity, Folder & Hook Logic ---
-# These hooks handle the account context switching, including From, Record,
-# Sendmail and PGP specific settings for each folder.
+# --- 3. UI & Display ---
+# Disable threading for a flat, chronological list
+set sort = reverse-date
+set sort_aux = reverse-date
 
-folder-hook '~/mail/posteo/*' ' \
-    set from = "Franz Keilholz <franz.keilholz@posteo.de>"; \
-    set record = "+posteo/Sent"; \
-    set sendmail = "/usr/bin/msmtp -a posteo"; \
-    set pgp_sign_as = "DB7201085C516B313F4B596F4AC6728E8FA2C883"; \
-    set pgp_autosign = yes; \
-    set signature = "~/code/email_signatur/signatur_posteo.txt"'
+# Clean index: Index, Status, Date, Sender(20 chars), Subject
+set index_format = "%4C %Z %{%d.%m.%Y}  %-20.20L  %s"
 
-folder-hook '~/mail/main/*' ' \
-    set from = "Franz Keilholz <franz@keilholz.biz>"; \
-    set record = "+main/Gesendet"; \
-    set sendmail = "/usr/bin/msmtp -a allinkl"; \
-    set pgp_sign_as = "1F8A6479AAB3FD2A2895A50EA60EF9B74F4FF43E"; \
-    set pgp_autosign = yes; \
-    set signature = "~/code/email_signatur/signatur_biz.txt"'
+# Minimalistic status bar
+set status_format = " %f | %m Mails | %n Neu "
 
-
-folder-hook '~/mail/spam/*'    ' \
-    set from = "spam@keilholz.biz"; \
-    set record = "+spam/Gesendet"; \
-    set sendmail = "/usr/bin/msmtp -a allinkl"; \
-    set pgp_autosign = no'
-
-folder-hook '~/mail/github/*'  ' \
-    set from = "github@keilholz.biz"; \
-    set record = "+github/Gesendet"; \
-    set sendmail = "/usr/bin/msmtp -a allinkl"; \
-    set pgp_autosign = yes'
-
-# Fallback to prevent PGP leakage when switching folders
-send-hook . 'set pgp_autosign=no pgp_autoencrypt=no'
-
-# --- 4. UI & Visuals ---
-set sort_aux = last-date
-set status_format = "-%r-NeoMutt: %f [Msgs:%m%?n? New:%n?%?o? Old:%o?%?d? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b?%?l? %l?]---(%s)-%>-(%P)---"
-
+# Header cleaning for the Pager (Read view)
 ignore *
 unignore from: to: cc: subject: date:
 hdr_order from: to: cc: subject: date:
+set weed = yes
 
-# --- 5. Keybindings & Navigation ---
-# Account switching
+# --- 4. Account Switching (The Switch) ---
+folder-hook '~/mail/posteo/.*' 'source ~/.config/neomutt/accounts/posteo'
+folder-hook '~/mail/main/.*'   'source ~/.config/neomutt/accounts/main'
+folder-hook '~/mail/spam/.*'   'source ~/.config/neomutt/accounts/spam'
+folder-hook '~/mail/github/.*' 'source ~/.config/neomutt/accounts/github'
+
+# --- 5. Keybindings & Macros ---
+
+# Global Navigation
+bind index,pager gg first-entry
+bind index,pager G last-entry
+bind index,pager q exit
+
+# Index Movement
+bind index j next-entry
+bind index k previous-entry
+bind index d delete-message
+bind index u undelete-message
+
+# Pager Movement (The Zen Scroll)
+bind pager j next-line
+bind pager k previous-line
+bind pager <C-d> half-down
+bind pager <C-u> half-up
+bind pager <C-f> next-page
+bind pager <C-b> previous-page
+bind pager gg top
+bind pager G bottom
+
+# --- Search Navigation (Vim-like) ---
+bind index n search-next
+bind index N search-opposite   # Shift+n ist jetzt "vorheriges Suchergebnis"
+
+# --- Markierungs-Shortcuts (Klar getrennt) ---
+# 'r' = Mark Read, 'u' = Mark Unread
+macro index r "<clear-flag>N" "Mark as read"
+macro index u "<set-flag>N" "Mark as unread"
+
+# Account Navigation
 macro index 1 "<change-folder>+posteo/INBOX<enter>"
 macro index 2 "<change-folder>+main/INBOX<enter>"
 macro index 3 "<change-folder>+spam/INBOX<enter>"
 macro index 4 "<change-folder>+github/INBOX<enter>"
 
-# Sync trigger
-macro index S "<shell-escape>bash -c 'setsid ~/.config/neomutt/sync-mail.sh >/dev/null 2>&1' &<enter>" "Sync Mail"
+# Folder Quick Switch
+mailboxes +posteo/INBOX +posteo/Sent +main/INBOX +main/Gesendet +spam/INBOX +github/INBOX
+macro index C "<change-folder>?<tab>" "Change to any mailbox"
 
-# --- PGP Settings ---
+# Syn on quit
+macro index q "<sync-mailbox><shell-escape>mbsync -c ~/.config/isync/mbsyncrc -a<enter><quit>" "Sync and Quit"
+# --- 6. PGP Settings (Global defaults) ---
 set pgp_use_gpg_agent = yes
 set pgp_verify_sig = yes
+set pgp_autosign = no
+set pgp_autoencrypt = no
 
-# --- Vim-like Navigation ---
-# Global movement
-bind index j next-entry
-bind index k previous-entry
-bind pager j next-line
-bind pager k previous-line
-
-# Generic navigation
-bind index,pager gg first-entry
-bind index,pager G last-entry
-bind index d delete-message
-bind index u undelete-message
-bind index o display-message
-bind pager d half-down
-bind pager u half-up
-bind index,pager q exit
-
-bind index,pager <F2> next-unread-mailbox
-macro index,pager v "<pipe-message>nvim -R -c 'set ft=mail | set buftype=nofile | set noswapfile' -<enter>" "View in nvim"
-
+# --- 7. Formatting ---
 auto_view text/html
 alternative_order text/plain text/enriched text/html
+
+# --- 8. Mailboxses ---
+mailboxes +posteo/INBOX +posteo/Sent +main/INBOX +main/Gesendet +spam/INBOX +spam/Gesendet +github/INBOX +github/Gesendet
 

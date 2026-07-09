@@ -1,0 +1,20 @@
+# --- Main (keilholz.biz) Identity Configuration ---
+
+# Sender identification
+set from = "Franz Keilholz <franz@keilholz.biz>"
+
+# Path for sent messages
+# Ensure this folder name matches your actual Maildir structure.
+set record = "+main/Gesendet"
+
+# SMTP settings for this specific account
+set sendmail = "/usr/bin/msmtp -a allinkl"
+
+# PGP settings: Opt-in only
+set pgp_sign_as = "1F8A6479AAB3FD2A2895A50EA60EF9B74F4FF43E"
+unset pgp_autosign
+unset pgp_autoencrypt
+
+# Account specific signature file
+set signature = "~/code/email_signatur/signatur_biz.txt"
+

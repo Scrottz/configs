@@ -1,0 +1,19 @@
+# --- Github Account Configuration ---
+
+# Sender identification
+set from = "github@keilholz.biz"
+
+# Path for sent messages
+set record = "+github/Gesendet"
+
+# SMTP settings
+set sendmail = "/usr/bin/msmtp -a allinkl"
+
+# PGP Settings (Sign outgoing notifications)
+set pgp_sign_as = "1F8A6479AAB3FD2A2895A50EA60EF9B74F4FF43E"
+unset pgp_autosign
+unset pgp_autoencrypt
+
+# No signature for automated system emails
+unset signature
+

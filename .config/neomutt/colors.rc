@@ -1,5 +1,27 @@
-color normal     green default
-color status     black green
+# --- Colors.rc: Simplified & Robust ---
+
+# Basic interface
+color normal     white default
 color error      red default
 color message    yellow default
-color indicator  black cyan
+color indicator  black green
+color status     black green
+color tree       green default
+
+# Index
+color index_author   green default
+color index_subject  white default
+color index_date     cyan default
+color index_number   yellow default
+
+# Pager (Reading mode)
+color hdrdefault     green default
+color quoted         cyan default
+color signature      white default
+color attachment     yellow default
+
+# Search highlights
+color search         black yellow
+color bold           white default
+color underline      white default
+
