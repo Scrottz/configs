@@ -29,5 +29,5 @@ echo "Reloading keyd service..."
 sudo systemctl enable keyd
 sudo systemctl restart keyd
 
-echo "Keyd setup complete. Capslock is now Control (held) / Escape (tapped)."
+echo "Keyd setup complete."
 
