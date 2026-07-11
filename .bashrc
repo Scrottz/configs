@@ -9,7 +9,7 @@ mainframe() {
     if tmux has-session -t "$session" 2>/dev/null; then
         tmux attach-session -t "$session"
     else
-        tmux new-session -d -s "$session" -n "mainframe"
+        tmux new-session -d -s "$session" -n " "
         tmux split-window -h -t "$session"
         tmux split-window -v -t "$session"  
         tmux split-window -v -t "$session"
@@ -30,7 +30,7 @@ mainframe() {
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
 # alias for quick config editing
-alias cfg='cd ~/.config && nvim .'
+alias cfg='nvim ~/.config'
 
 # alias für pavucontrol
 alias audio='/usr/bin/pavucontrol &'

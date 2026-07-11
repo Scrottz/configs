@@ -23,7 +23,11 @@ return {
 					lualine_a = { "mode" },
 					lualine_b = { "branch" },
 					lualine_c = {
-						"filename",
+						{
+							"filename",
+							path = 1,
+							shorting_target = 40,
+						},
 						{
 							function()
 								local navic = require("nvim-navic")

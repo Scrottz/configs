@@ -54,7 +54,6 @@ require("lazy").setup({
 -- =========================================================================
 require("keymappings") -- Load custom keybindings
 require("lsp") -- Load LSP configuration
--- require("statusbar") -- Load statusline configuration (if any)
 
 -- Enforce UI settings to prevent plugin overrides
 vim.opt.number = true
