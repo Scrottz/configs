@@ -67,8 +67,7 @@ bind index n search-next
 bind index N search-opposite   # Shift+n ist jetzt "vorheriges Suchergebnis"
 
 # --- Markierungs-Shortcuts (Klar getrennt) ---
-# 'r' = Mark Read, 'u' = Mark Unread
-macro index r "<clear-flag>N" "Mark as read"
+macro index R "<clear-flag>N" "Mark as unread"
 macro index u "<set-flag>N" "Mark as unread"
 
 # Account Navigation
