@@ -48,6 +48,9 @@ alias ncspot-kill="pkill -9 -f ncspot"
 # ssh to pi3
 alias ssh-pi3="ssh franz@192.168.178.2"
 
+# Map fdfind to fd
+alias fd='fdfind'
+
 # go path
 export PATH=$PATH:$(go env GOPATH)/bin
 # ==========================================================================
@@ -79,3 +82,14 @@ alias brainc="llm -t code_prompt -c -m openrouter/meta-llama/llama-3.3-70b-instr
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+source /usr/share/doc/fzf/examples/key-bindings.bash
+
+alias fd='fdfind'
+alias cat='batcat --plain --paging=never'
+
+# fzf integration configuration
+export FZF_DEFAULT_COMMAND='fdfind --type f --hidden --follow --exclude .git --exclude .cache --max-depth 5'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_CTRL_T_OPTS="--preview 'batcat --style=numbers --color=always --line-range :50 {}'"
+
