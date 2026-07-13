@@ -21,3 +21,6 @@ run_segment() {
     return 0
 }
 
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    run_segment
+fi
