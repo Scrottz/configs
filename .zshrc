@@ -1,12 +1,45 @@
-# ========================================================================== lolxD
+# ==========================================================================
 # Arch Linux ZSH Configuration
 # ==========================================================================
 
+# --- vi mode ---
+bindkey -v
+
+# Ensure Backspace works in both modes
+bindkey -M viins '^?' backward-delete-char
+bindkey -M vicmd '^?' backward-delete-char
+
+# Ensure Delete key works in both modes
+bindkey -M viins '^[[3~' delete-char
+bindkey -M vicmd '^[[3~' delete-char
+bindkey -M viins '^[[3;5~' delete-char
+bindkey -M vicmd '^[[3;5~' delete-char
+
+MODE_INDICATOR="%F{78}[INSERT]%f"
+
+function zle-line-init {
+  MODE_INDICATOR="%F{78}[INSERT]%f"
+  zle reset-prompt
+}
+
+function zle-keymap-select {
+  if [ $KEYMAP = vicmd ]; then
+    MODE_INDICATOR="%F{202}[NORMAL]%f"
+  else
+    MODE_INDICATOR="%F{78}[INSERT]%f"
+  fi
+  zle reset-prompt
+}
+zle -N zle-keymap-select
+zle -N zle-line-init
+
 # --- Prompt Configuration ---
 setopt PROMPT_SUBST
-PROMPT='%F{244}[ %F{34}%n%f%F{244}@%F{78}%m %F{244}: %F{36}%~ %F{244}]
+PROMPT='%F{244}[ %F{34}%n%f%F{244}@%F{78}%m %F{244}: %F{36}%~ %F{244}] $MODE_INDICATOR
 %F{78}❯ %f%b'
+
 export PATH="$HOME/.local/bin:$PATH"
+
 # --- Custom Functions ---
 # Initializes a predefined tmux layout with 4 panes.
 mainframe() {
@@ -22,8 +55,8 @@ mainframe() {
         
         tmux send-keys -t "$session:0.0" 'clear' C-m
         tmux send-keys -t "$session:0.1" 'clear' C-m
-        tmux send-keys -t "$session:0.2" 'neomutt' C-m
-        tmux send-keys -t "$session:0.3" 'ncspot' C-m
+        tmux send-keys -t "$session:0.2" 'clear' C-m
+        tmux send-keys -t "$session:0.3" 'clear' C-m
         
         tmux select-pane -t "$session:0.0"
         tmux attach-session -t "$session"
@@ -38,36 +71,10 @@ alias dotfiles='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias cfg='nvim ~/.config'
 
 # System and utility aliases.
-alias audio='/usr/bin/pavucontrol &'
-alias ncspot-kill="pkill -9 -f ncspot"
 alias ssh-pi3="ssh franz@192.168.178.2"
 
 # Arch-specific mappings for command line tools.
-alias fd='fd'
-alias cat='bat --plain --paging=never'
-
-# --- Environment Variables & Paths ---
-# PATH additions for cargo, nvim, and go.
-[ -d "$HOME/.cargo/bin" ] && export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
-export PATH="$PATH:$(go env GOPATH)/bin"
-
-# --- LLM CLI Aliases ---
-# Aliases for LLM interaction tools.
-# 'q' = Quick, 'qp' = Quick Paid, 'brain' = High-Intelligence.
-# 'c' suffix denotes conversation continuation.
-alias q="llm -t code_prompt -m gemini/gemini-3.1-flash-lite"
-alias qc="llm -t code_prompt -c -m gemini/gemini-3.1-flash-lite"
-
-alias qp="llm -t code_prompt -m openrouter/anthropic/claude-3-haiku"
-alias qpc="llm -t code_prompt -c -m openrouter/anthropic/claude-3-haiku"
-
-alias brain="llm -t code_prompt -m openrouter/meta-llama/llama-3.3-70b-instruct"
-alias brainc="llm -t code_prompt -c -m openrouter/meta-llama/llama-3.3-70b-instruct"
-
-# --- Node Version Manager (NVM) ---
-export NVM_DIR="$HOME/.nvm"
-[ -s "/usr/share/nvm/init-nvm.sh" ] && . "/usr/share/nvm/init-nvm.sh"
+alias cat='bat --paging=never'
 
 # --- FZF Integration ---
 # Load key-bindings and completion for fzf.
@@ -75,8 +82,72 @@ export NVM_DIR="$HOME/.nvm"
 [ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
 
 # FZF configuration including exclusion of git files and cache.
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git --exclude .cache --max-depth 5'
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --no-ignore --exclude .cache'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_CTRL_T_OPTS="--preview 'bat --style=numbers --color=always --line-range :50 {}'"
 
+export XDG_CURRENT_DESKTOP=sway
+export XDG_SESSION_TYPE=wayland
+
+
+# --- LLM Mainframe Workflow ---
+export LLM_MODEL="gemini/gemini-3.1-flash-lite"
+export LLM_DB="$HOME/.config/io.datasette.llm/logs.db"
+export ACTIVE_LLM_CID=""
+export ACTIVE_LLM_NAME=""
+
+# Helper to display active LLM session in prompt
+get_llm_status() {
+    if [ -n "$ACTIVE_LLM_NAME" ]; then
+        echo " %F{208}󰒓 %f%F{226}$ACTIVE_LLM_NAME%f"
+    fi
+}
+
+# Update your prompt to include the status indicator
+PROMPT='%F{244}[ %F{34}%n%f%F{244}@%F{78}%m %F{244}: %F{36}%~ %F{244}] $(get_llm_status) $MODE_INDICATOR
+%F{78}❯ %f%b'
+
+# 1. Start a new session and lock it
+qn() {
+    if [ -z "$2" ]; then
+        echo "Usage: qn <session_name> \"<prompt>\""
+        return 1
+    fi
+    # Create the session
+    llm -t code_prompt -m "$LLM_MODEL" -s "$1" "$2"
+    # Capture the ID and name of the newly created session
+    export ACTIVE_LLM_CID=$(sqlite3 "$LLM_DB" "SELECT conversation_id FROM responses ORDER BY datetime_utc DESC LIMIT 1;")
+    export ACTIVE_LLM_NAME="$1"
+    echo "New session locked: $ACTIVE_LLM_CID ($ACTIVE_LLM_NAME)"
+}
+
+# 2. Select an existing session and lock it
+qc() {
+    # If an ID is passed directly, lock it
+    if [ -n "$1" ]; then
+        export ACTIVE_LLM_CID="$1"
+        export ACTIVE_LLM_NAME=$(sqlite3 "$LLM_DB" "SELECT system FROM responses WHERE conversation_id='$1' LIMIT 1;")
+        echo "Locked to session: $1"
+        return
+    fi
+
+    # Interactive selection using fzf and your verified SQL query
+    local selection=$(sqlite3 -separator '|' "$LLM_DB" \
+        "SELECT conversation_id, system, datetime(datetime_utc, 'localtime') FROM responses WHERE system IS NOT NULL GROUP BY conversation_id ORDER BY datetime_utc DESC LIMIT 20;" | \
+        fzf --height 40% --reverse --prompt="Select Session > " --delimiter='\|' --with-nth=2,3)
+    
+    export ACTIVE_LLM_CID=$(echo "$selection" | cut -d'|' -f1 | xargs)
+    export ACTIVE_LLM_NAME=$(echo "$selection" | cut -d'|' -f2 | xargs)
+    echo "Locked to: $ACTIVE_LLM_NAME ($ACTIVE_LLM_CID)"
+}
+
+# 3. Chat within the locked session
+q() {
+    if [ -z "$ACTIVE_LLM_CID" ]; then
+        echo "No session locked. Run 'qc' or 'qn' first."
+        return 1
+    fi
+    # Use --cid to target the specific locked session
+    llm --cid "$ACTIVE_LLM_CID" -m "$LLM_MODEL" "$*"
+}
 

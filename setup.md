@@ -1,0 +1,23 @@
+[programs]
+    - keyd -> sudo mv etc/keys/default.conf /etc/keyd/defaut.conf
+    - docker
+    - tmux
+    - sway
+    - git
+    - pipx
+    - neomutt
+    - fd
+    - fzf   
+    - bat
+    - fuzzel
+    - files-to-promp
+    - unzip
+    - p7zip
+    - swaylock
+    - grim
+    - imagemagick
+    - yay
+    - base-delvel
+    - vesktop
+    - htop
+    - nchat
