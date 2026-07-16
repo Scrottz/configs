@@ -32,7 +32,7 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec $menu
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+e exec swaymsg exit
-bindsym $mod+Shift+Escape exec 'grim /tmp/screen.png && convert /tmp/screen.png -blur 0x10 /tmp/screen.png && swaylock -i /tmp/screen.png'
+bindsym $mod+Shift+Escape exec ~/.config/sway/scripts/lock.sh
 
 # Lid Switch Logic
 bindswitch lid:on output $laptop disable
@@ -86,10 +86,5 @@ bar {
 }
 
 include /etc/sway/config.d/*
-
-# Nextcloud GUI Fix: Fenster schweben lassen und Fokus erzwingen
-for_window [class="Nextcloud"] floating enable, border pixel 1, sticky enable
-for_window [app_id="nextcloud"] floating enable, border pixel 1, sticky enable
-
 
 exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=secrets

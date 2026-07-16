@@ -60,7 +60,7 @@ mainframe() {
         tmux send-keys -t "$session:0.0" 'clear' C-m
         tmux send-keys -t "$session:0.1" 'clear' C-m
         tmux send-keys -t "$session:0.2" 'clear' C-m
-        tmux send-keys -t "$session:0.3" 'clear' C-m
+        tmux send-keys -t "$session:0.3" 'spotatui' C-m
         
         tmux select-pane -t "$session:0.0"
         tmux attach-session -t "$session"
@@ -92,7 +92,6 @@ export FZF_CTRL_T_OPTS="--preview 'bat --style=numbers --color=always --line-ran
 
 export XDG_CURRENT_DESKTOP=sway
 export XDG_SESSION_TYPE=wayland
-
 
 # --- LLM Mainframe Workflow ---
 export LLM_MODEL="gemini/gemini-3.1-flash-lite"
