@@ -1,0 +1,13 @@
+[Unit]
+Description=Rclone Bidirectional Sync
+After=network-online.target
+
+[Service]
+# Execute the script from the config directory
+ExecStart=/home/franz/.config/rclone/sync-robust.sh
+# Restart automatically if it crashes
+Restart=always
+RestartSec=60
+
+[Install]
+WantedBy=default.target

@@ -2,6 +2,10 @@
 # Arch Linux ZSH Configuration
 # ==========================================================================
 
+# --- Default editors ---
+export EDITOR=nvim
+export VISUAL=nvim
+
 # --- vi mode ---
 bindkey -v
 
