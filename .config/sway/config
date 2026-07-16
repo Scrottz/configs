@@ -87,3 +87,9 @@ bar {
 
 include /etc/sway/config.d/*
 
+# Nextcloud GUI Fix: Fenster schweben lassen und Fokus erzwingen
+for_window [class="Nextcloud"] floating enable, border pixel 1, sticky enable
+for_window [app_id="nextcloud"] floating enable, border pixel 1, sticky enable
+
+
+exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=secrets

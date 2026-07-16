@@ -19,3 +19,4 @@
   - Bildschirme aus
 - zsh autiocomplete frisst nicht alle programme
 - nchat einrichten
+- fileexplorer

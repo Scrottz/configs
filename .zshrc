@@ -118,7 +118,7 @@ qn() {
         return 1
     fi
     # Create the session
-    llm -t code_prompt -m "$LLM_MODEL" -s "$1" "$2"
+    llm -m "$LLM_MODEL" -s "$1" "$2"
     # Capture the ID and name of the newly created session
     export ACTIVE_LLM_CID=$(sqlite3 "$LLM_DB" "SELECT conversation_id FROM responses ORDER BY datetime_utc DESC LIMIT 1;")
     export ACTIVE_LLM_NAME="$1"
