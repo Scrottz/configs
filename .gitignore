@@ -22,3 +22,6 @@ Downloads/
 .cache/               
 .local/share/Trash/
 .local/share/nvim/   
+
+# --- rclone conf ---
+.config/rclone/rclone.conf
