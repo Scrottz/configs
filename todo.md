@@ -18,11 +18,18 @@
   - Bildschirme aus
 - nchat einrichten
 
-# 2026-07-16
+# Done
 
-## Done
+## 2026-07-16
 
-    - Spotify Tui
     - Nvim ready
     - Owncloud Sync
     - filexplorer thunar
+
+## 2026-07-17
+
+    - spotify_player
+        - alias anlegen
+    - Neomutt (sync fehlt/posteo senden geht noch nciht)
+        - pgp keys integriert
+    - isntalled steam - geht ganz gut

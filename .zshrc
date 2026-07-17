@@ -57,11 +57,6 @@ mainframe() {
         tmux split-window -v -t "$session"  
         tmux split-window -v -t "$session"
         
-        tmux send-keys -t "$session:0.0" 'clear' C-m
-        tmux send-keys -t "$session:0.1" 'clear' C-m
-        tmux send-keys -t "$session:0.2" 'clear' C-m
-        tmux send-keys -t "$session:0.3" 'spotatui' C-m
-        
         tmux select-pane -t "$session:0.0"
         tmux attach-session -t "$session"
     fi
@@ -79,6 +74,8 @@ alias ssh-pi3="ssh franz@192.168.178.2"
 
 # Arch-specific mappings for command line tools.
 alias cat='bat --paging=never'
+
+alias spotify='spotify_player'
 
 # --- FZF Integration ---
 # Load key-bindings and completion for fzf.
@@ -110,6 +107,8 @@ get_llm_status() {
 PROMPT='%F{244}[ %F{34}%n%f%F{244}@%F{78}%m %F{244}: %F{36}%~ %F{244}] $(get_llm_status) $MODE_INDICATOR
 %F{78}❯ %f%b'
 
+# Force a manual bidirectional sync
+alias owncloud-sync='rclone bisync /home/franz/owncloud/ owncloud_fkeilholz: --conflict-resolve newer --check-access --verbose'
 # 1. Start a new session and lock it
 qn() {
     if [ -z "$2" ]; then
