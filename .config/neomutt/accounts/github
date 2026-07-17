@@ -7,7 +7,7 @@ set from = "github@keilholz.biz"
 set record = "+github/Gesendet"
 
 # SMTP settings
-set sendmail = "/usr/bin/msmtp -a allinkl"
+set sendmail = "/usr/bin/msmtp -C /home/franz/.config/msmtp/config -a allinkl"
 
 # PGP Settings (Sign outgoing notifications)
 set pgp_sign_as = "1F8A6479AAB3FD2A2895A50EA60EF9B74F4FF43E"

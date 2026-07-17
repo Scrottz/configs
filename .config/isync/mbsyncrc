@@ -3,7 +3,7 @@ IMAPAccount posteo
 Host posteo.de
 User franz.keilholz@posteo.de
 PassCmd "secret-tool lookup service mbsync user franz.keilholz@posteo.de"
-SSLType IMAPS
+TLSType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
 IMAPStore posteo-remote
@@ -28,7 +28,7 @@ IMAPAccount allinklMain
 Host w016db5f.kasserver.com
 User franz@keilholz.biz
 PassCmd "secret-tool lookup service mbsync user franz@keilholz.biz"
-SSLType IMAPS
+TLSType IMAPS
 
 IMAPStore allinklMain-remote
 Account allinklMain
@@ -52,7 +52,7 @@ IMAPAccount allinklSpam
 Host w016db5f.kasserver.com
 User spam@keilholz.biz
 PassCmd "secret-tool lookup service mbsync user spam@keilholz.biz"
-SSLType IMAPS
+TLSType IMAPS
 
 IMAPStore allinklSpam-remote
 Account allinklSpam
@@ -76,7 +76,7 @@ IMAPAccount allinklGithub
 Host w016db5f.kasserver.com
 User github@keilholz.biz
 PassCmd "secret-tool lookup service mbsync user github@keilholz.biz"
-SSLType IMAPS
+TLSType IMAPS
 
 IMAPStore allinklGithub-remote
 Account allinklGithub

@@ -42,8 +42,8 @@ folder-hook '~/mail/github/.*' 'source ~/.config/neomutt/accounts/github'
 # --- 5. Keybindings & Macros ---
 
 # Global Navigation
-bind index,pager gg first-entry
-bind index,pager G last-entry
+bind index,pager g noop
+bind index,pager G bottom
 bind index,pager q exit
 
 # Index Movement
@@ -51,6 +51,8 @@ bind index j next-entry
 bind index k previous-entry
 bind index d delete-message
 bind index u undelete-message
+bind index gg first-entry
+
 
 # Pager Movement (The Zen Scroll)
 bind pager j next-line

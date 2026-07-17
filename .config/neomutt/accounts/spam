@@ -7,7 +7,7 @@ set from = "spam@keilholz.biz"
 set record = "+spam/Gesendet"
 
 # SMTP settings
-set sendmail = "/usr/bin/msmtp -a allinkl"
+set sendmail = "/usr/bin/msmtp -C /home/franz/.config/msmtp/config -a allinkl"
 
 # No PGP/Signature for this address
 unset pgp_autosign

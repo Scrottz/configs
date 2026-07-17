@@ -7,7 +7,7 @@ set from = "Franz Keilholz <franz.keilholz@posteo.de>"
 set record = "+posteo/Sent"
 
 # SMTP settings for this specific account
-set sendmail = "/usr/bin/msmtp -a posteo"
+set sendmail = "/usr/bin/msmtp -C /home/franz/.config/msmtp/config -a posteo"
 
 # PGP settings: Opt-in only, we don't force signing globally
 # Only set your specific key for signing here

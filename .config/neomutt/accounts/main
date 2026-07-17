@@ -8,7 +8,7 @@ set from = "Franz Keilholz <franz@keilholz.biz>"
 set record = "+main/Gesendet"
 
 # SMTP settings for this specific account
-set sendmail = "/usr/bin/msmtp -a allinkl"
+set sendmail = "/usr/bin/msmtp -C /home/franz/.config/msmtp/config -a allinkl"
 
 # PGP settings: Opt-in only
 set pgp_sign_as = "1F8A6479AAB3FD2A2895A50EA60EF9B74F4FF43E"
