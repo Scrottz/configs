@@ -1,0 +1,71 @@
+{
+    "layer": "top",
+    "position": "top",
+    "margin-top": 5,
+    "margin-left": 10,
+    "margin-right": 10,
+    "modules-left": ["sway/workspaces"],
+    "modules-center": ["custom/mail"],
+    "modules-right": [
+        "group/cpu-group",
+        "memory",
+        "custom/network",
+        "battery",
+        "clock"
+    ],
+
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": false
+    },
+
+    "custom/mail": {
+        "format": "{}",
+        "exec": "echo '{\"text\": \"¯\\\\_(ツ)_/¯\"}'",
+        "return-type": "json",
+        "interval": 3600
+    },
+
+    "group/cpu-group": {
+        "orientation": "horizontal",
+        "modules": ["cpu", "temperature"]
+    },
+
+    "cpu": { "format": " {usage}%" },
+    "temperature": {
+        "critical-threshold": 85,
+        "format-critical": " {temperatureC}°C",
+        "format": " {temperatureC}°C"
+    },
+
+    "memory": {
+        "format": " {used:0.1f}GB({percentage}%)",
+        "interval": 5
+    },
+
+    "group/net-group": {
+        "orientation": "horizontal",
+        "modules": ["network"]
+    },
+
+    "custom/network": {
+        "exec": "~/.config/waybar/scripts/network.sh",
+        "format": "{}",
+        "return-type": "json",
+        "interval": 2,
+        "on-click": "foot nmtui"
+    },
+
+    "battery": {
+        "states": { "warning": 30, "critical": 15 },
+        "format": "{icon} {capacity}%",
+        "format-charging": "󰂄 {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-icons": ["", "", "", "", ""]
+    },
+
+    "clock": {
+        "format": "{:%H:%M  %d.%m.%Y}"
+    }
+}
+`

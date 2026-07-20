@@ -96,8 +96,7 @@ bindsym $mod+r mode "resize"
 
 # Minimal Status Bar
 bar {
-    position top
-    status_command while date +'%H:%M'; do sleep 60; done
+    swaybar_command waybar
 }
 
 include /etc/sway/config.d/*
