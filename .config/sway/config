@@ -1,7 +1,18 @@
 # Global Variables
 set $mod Mod4
-set $term foot
+set $term kitty
 set $menu fuzzel
+set $green #00FF00
+set $black #000000
+set $darkgreen #003300
+
+# window colloring
+client.focused          $green    $black    $green    $green    $green
+client.focused_inactive $darkgreen $black    $darkgreen $darkgreen $darkgreen
+client.unfocused        $black    $black    $darkgreen $black    $darkgreen
+client.urgent           #FF0000   #000000   #FF0000    #FF0000   #FF0000
+
+# window clow setting
 
 # Monitor Setup
 set $laptop eDP-1
@@ -10,6 +21,8 @@ set $monitor HDMI-A-1
 # Set solid black background
 output $laptop bg #000000 solid_color
 output $monitor bg #000000 solid_color
+
+exec_always swaybg -i ~/owncloud/wallpaper.png -m fill
 
 # Workspace Migration Logic
 workspace 1 output $monitor $laptop

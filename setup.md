@@ -22,3 +22,4 @@
 - vesktop
 - htop
 - nchat
+- vnstat

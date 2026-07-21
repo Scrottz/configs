@@ -45,24 +45,39 @@ PROMPT='%F{244}[ %F{34}%n%f%F{244}@%F{78}%m %F{244}: %F{36}%~ %F{244}] $MODE_IND
 export PATH="$HOME/.local/bin:$PATH"
 
 # --- Custom Functions ---
-# Initializes a predefined tmux layout with 4 panes.
 mainframe() {
     local session="mainframe"
-    
+
     if tmux has-session -t "$session" 2>/dev/null; then
         tmux attach-session -t "$session"
     else
         tmux new-session -d -s "$session" -n " "
+
+        # 1. Rechts splitten
         tmux split-window -h -t "$session"
-        tmux split-window -v -t "$session"  
-        tmux split-window -v -t "$session"
-        
+
+        # 2. Das rechte Pane (Index 1) in drei unterteilen
+        # Wir splitten 1 zu 2, dann 2 zu 3
+        tmux split-window -v -t "$session:0.1"
+        tmux split-window -v -t "$session:0.2"
+
+        # 3. Jetzt die Größen (von oben nach unten)
+        # Das oberste rechte Pane (Index 1) bekommt 43% Gesamthöhe
+        tmux resize-pane -t "$session:0.1" -y 43%
+        # Das mittlere rechte Pane (Index 2) bekommt auch 43%
+        tmux resize-pane -t "$session:0.2" -y 43%
+        # Das unterste Pane (Index 3) bekommt den Rest automatisch
+
+        # Fokus auf das linke Hauptpane
         tmux select-pane -t "$session:0.0"
         tmux attach-session -t "$session"
     fi
 }
 
 # --- Aliases ---
+# tmux config
+alias tmux="tmux -f ~/.config/tmux/tmux.conf"
+
 # Alias to manage dotfiles via a bare git repository.
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
@@ -152,4 +167,33 @@ q() {
     # Use --cid to target the specific locked session
     llm --cid "$ACTIVE_LLM_CID" -m "$LLM_MODEL" "$*"
 }
+# 4. Delete an existing session
+qd() {
+    # 1. Interactive selection using fzf
+    local selection=$(sqlite3 -separator '|' "$LLM_DB" \
+        "SELECT conversation_id, system, datetime(datetime_utc, 'localtime') FROM responses WHERE system IS NOT NULL GROUP BY conversation_id ORDER BY datetime_utc DESC;" | \
+        fzf --height 40% --reverse --prompt="Delete Session > " --delimiter='\|' --with-nth=2,3)
 
+    if [ -z "$selection" ]; then
+        echo "No session selected."
+        return 0
+    fi
+
+    local target_cid=$(echo "$selection" | cut -d'|' -f1 | xargs)
+    local target_name=$(echo "$selection" | cut -d'|' -f2 | xargs)
+
+    echo -n "Really delete session '$target_name' ($target_cid)? [y/N]: "
+    read -r confirm
+    if [[ "$confirm" =~ ^[Yy]$ ]]; then
+        sqlite3 "$LLM_DB" "DELETE FROM responses WHERE conversation_id='$target_cid';"
+        echo "Session deleted."
+
+        # Reset ACTIVE_LLM_CID if the deleted session was currently active
+        if [ "$ACTIVE_LLM_CID" = "$target_cid" ]; then
+            export ACTIVE_LLM_CID=""
+            export ACTIVE_LLM_NAME=""
+        fi
+    else
+        echo "Aborted."
+    fi
+}
