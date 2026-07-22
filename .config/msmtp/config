@@ -1,0 +1,23 @@
+defaults
+auth           on
+tls            on
+tls_trust_file /etc/ssl/certs/ca-certificates.crt
+logfile        ~/.cache/msmtp.log
+
+account posteo
+host           posteo.de
+port           587
+tls            on
+tls_starttls   on
+from           franz.keilholz@posteo.de
+user           franz.keilholz@posteo.de
+passwordeval   "secret-tool lookup service msmtp user franz.keilholz@posteo.de"
+
+account allinkl
+host           w016db5f.kasserver.com
+port           587
+from           franz@keilholz.biz
+user           franz@keilholz.biz
+passwordeval   "secret-tool lookup service msmtp user franz@keilholz.biz"
+
+account default : posteo
