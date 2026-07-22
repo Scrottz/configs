@@ -2,12 +2,25 @@
 # Arch Linux ZSH Configuration
 # ==========================================================================
 
+# disable stty suspend -> leader z in nvim cloased nvim
+stty susp undef
+
 # --- Default editors ---
 export EDITOR=nvim
 export VISUAL=nvim
 
 # --- vi mode ---
 bindkey -v
+
+# --- ZSH History Configuration ---
+HISTSIZE=10000
+SAVEHIST=10000
+HISTFILE=~/.zsh_history
+
+setopt INC_APPEND_HISTORY  
+setopt SHARE_HISTORY       
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_REDUCE_BLANKS  
 
 # Ensure Backspace works in both modes
 bindkey -M viins '^?' backward-delete-char
@@ -92,7 +105,10 @@ alias cat='bat --paging=never'
 
 alias spotify='spotify_player'
 
-# --- FZF Integration ---
+# Force a manual bidirectional sync
+alias owncloud-sync='rclone bisync /home/franz/owncloud/ owncloud_fkeilholz: --conflict-resolve newer --check-access --verbose'
+
+    # --- FZF Integration ---
 # Load key-bindings and completion for fzf.
 [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
 [ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
@@ -122,8 +138,7 @@ get_llm_status() {
 PROMPT='%F{244}[ %F{34}%n%f%F{244}@%F{78}%m %F{244}: %F{36}%~ %F{244}] $(get_llm_status) $MODE_INDICATOR
 %F{78}❯ %f%b'
 
-# Force a manual bidirectional sync
-alias owncloud-sync='rclone bisync /home/franz/owncloud/ owncloud_fkeilholz: --conflict-resolve newer --check-access --verbose'
+
 # 1. Start a new session and lock it
 qn() {
     if [ -z "$2" ]; then
