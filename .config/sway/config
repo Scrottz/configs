@@ -22,7 +22,7 @@ set $monitor HDMI-A-1
 output $laptop bg #000000 solid_color
 output $monitor bg #000000 solid_color
 
-exec_always swaybg -i ~/owncloud/wallpaper.png -m fill
+exec_always swaybg -i ~/.config/sway/wallpaper.png -m fill
 
 # Workspace Migration Logic
 workspace 1 output $monitor $laptop
