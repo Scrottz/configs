@@ -6,12 +6,6 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
--- Ensure Git is found and configured correctly for lazy.nvim
--- By explicitly setting clone_method and disabling terminal prompts
-vim.g.lazy_git_config = {
-	clone_method = "ssh", -- Use SSH for cloning plugins
-	git_executable = "/usr/bin/git",
-}
 vim.env.GIT_TERMINAL_PROMPT = "0" -- Disable Git terminal prompts
 
 -- Ensure Neovim can find executables managed by Mason (like Git)
@@ -44,6 +38,10 @@ vim.opt.rtp:prepend(lazypath) -- Add lazy.nvim to runtimepath
 require("lazy").setup({
 	spec = { { import = "plugins" } },
 	defaults = { lazy = true },
+	git = {
+		url_format = "git@github.com:%s.git",
+		concurrency = 2,
+	},
 	-- Optionally, configure rocks if needed, but it's not the cause of the git error
 	-- rocks = { enabled = false },
 })
