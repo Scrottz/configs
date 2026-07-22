@@ -6,7 +6,7 @@
 -- LEADER KEY: Space as prefix for custom commands
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
-
+vim.opt.timeoutlen = 300
 local opt = vim.opt
 
 -- =========================================================================
@@ -15,7 +15,6 @@ local opt = vim.opt
 -- Enable undo history across sessions, stored in dedicated directory
 opt.undofile = true
 opt.undodir = vim.fn.expand("~/.config/nvim/undo")
-
 
 -- =========================================================================
 -- 2. VISUAL DISPLAY & NAVIGATION
@@ -30,20 +29,20 @@ local number_group = vim.api.nvim_create_augroup("NumberToggle", { clear = true 
 
 -- When leaving insert mode or entering the buffer, show relative numbers
 vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "InsertLeave" }, {
-    group = number_group,
-    callback = function()
-        if vim.api.nvim_get_mode().mode ~= "i" then
-            opt.relativenumber = true
-        end
-    end,
+	group = number_group,
+	callback = function()
+		if vim.api.nvim_get_mode().mode ~= "i" then
+			opt.relativenumber = true
+		end
+	end,
 })
 
 -- When entering insert mode or leaving the buffer, show absolute numbers
 vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter" }, {
-    group = number_group,
-    callback = function()
-        opt.relativenumber = false
-    end,
+	group = number_group,
+	callback = function()
+		opt.relativenumber = false
+	end,
 })
 
 opt.cursorline = true
@@ -99,8 +98,9 @@ vim.opt.foldlevel = 99
 vim.opt.foldenable = true
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "python", "lua", "vim", "markdown", "yaml" },
-    callback = function()
-        pcall(vim.treesitter.start)
-    end,
+	pattern = { "python", "lua", "vim", "markdown", "yaml" },
+	callback = function()
+		vim.opt_local.foldmethod = "expr"
+		vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+	end,
 })
