@@ -1,26 +1,29 @@
 #!/bin/bash
+MAIL_ROOT="$HOME/mail"
 
-run_segment() {
-    MAIL_ROOT="$HOME/mail"
-    names=("Posteo" "Main" "Github" "Spam")
-    paths=("posteo/INBOX" "main/INBOX" "github/INBOX" "spam/INBOX")
+boxes=(
+    "Posteo:$MAIL_ROOT/posteo/INBOX/new/"
+    "Main:$MAIL_ROOT/main/INBOX/new/"
+    "Github:$MAIL_ROOT/github/INBOX/new/"
+    "Spam:$MAIL_ROOT/spam/INBOX/new/"
+)
 
-    out=""
-    for i in "${!names[@]}"; do
-        num=$(find "$MAIL_ROOT/${paths[$i]}/new/" -type f 2>/dev/null | wc -l)
-        if [ "$num" -gt 0 ]; then
-            out="${out} ${names[$i]}:$num"
-        fi
-    done
+out=""
+for b in "${boxes[@]}"; do
+    name="${b%%:*}"
+    path="${b#*:}"
 
-    if [ -z "${out// }" ]; then
-        echo "¯\_(ツ)_/¯"
-    else
-        echo "$out"
+    count=$(find "$path" -maxdepth 0 -empty 2>/dev/null || ls -1q "$path" | wc -l)
+
+    count=$(ls -1q "$path" 2>/dev/null | wc -l)
+
+    if [ "$count" -gt 0 ]; then
+        out="${out} ${name}:$count"
     fi
-    return 0
-}
+done
 
-if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-    run_segment
+if [ -z "${out// }" ]; then
+    echo "{\"text\": \"¯\\\\_(ツ)_/¯\"}"
+else
+    echo "{\"text\": \"$out\"}"
 fi

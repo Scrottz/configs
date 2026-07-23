@@ -22,10 +22,10 @@
     },
 
     "custom/mail": {
+        "exec": "~/.config/neomutt/mail-count.sh",
         "format": "{}",
-        "exec": "echo '{\"text\": \"¯\\\\_(ツ)_/¯\"}'",
         "return-type": "json",
-        "interval": 3600
+        "signal": 1
     },
 
     "group/cpu-group": {

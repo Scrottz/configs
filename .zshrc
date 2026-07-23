@@ -15,13 +15,12 @@ bindkey -v
 # --- ZSH History Configuration ---
 HISTSIZE=10000
 SAVEHIST=10000
-HISTFILE=~/.zsh_history
+HISTFILE=~/.config/zsh/.zsh_history
 
 setopt INC_APPEND_HISTORY  
 setopt SHARE_HISTORY       
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_REDUCE_BLANKS  
-
 # Ensure Backspace works in both modes
 bindkey -M viins '^?' backward-delete-char
 bindkey -M vicmd '^?' backward-delete-char

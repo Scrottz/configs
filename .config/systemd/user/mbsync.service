@@ -6,4 +6,7 @@ After=network-online.target
 Type=oneshot
 ExecStart=/usr/bin/mbsync -c %h/.config/isync/mbsyncrc -a
 ExecStartPost=/usr/bin/notmuch new
-ExecStartPost=/usrbinnotmuch new
+ExecStartPost=/usr/bin/pkill -RTMIN+1 waybar
+
+[Install]
+WantedBy=default.target

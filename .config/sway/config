@@ -12,8 +12,6 @@ client.focused_inactive $darkgreen $black    $darkgreen $darkgreen $darkgreen
 client.unfocused        $black    $black    $darkgreen $black    $darkgreen
 client.urgent           #FF0000   #000000   #FF0000    #FF0000   #FF0000
 
-# window clow setting
-
 # Monitor Setup
 set $laptop eDP-1
 set $monitor HDMI-A-1

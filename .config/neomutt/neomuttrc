@@ -69,9 +69,8 @@ bind index n search-next
 bind index N search-opposite   # Shift+n ist jetzt "vorheriges Suchergebnis"
 
 # --- Markierungs-Shortcuts (Klar getrennt) ---
-macro index R "<clear-flag>N" "Mark as unread"
-macro index u "<set-flag>N" "Mark as unread"
-
+macro index R "<clear-flag>N<sync-mailbox>" "Mark as read"
+macro index u "<set-flag>N<sync-mailbox>" "Mark as unread"
 # Account Navigation
 macro index 1 "<change-folder>+posteo/INBOX<enter>"
 macro index 2 "<change-folder>+main/INBOX<enter>"
@@ -83,8 +82,8 @@ mailboxes +posteo/INBOX +posteo/Sent +main/INBOX +main/Gesendet +spam/INBOX +git
 macro index C "<change-folder>?<tab>" "Change to any mailbox"
 
 # Syn on quit
-macro index q "<sync-mailbox><shell-escape>mbsync -c ~/.config/isync/mbsyncrc -a<enter><quit>" "Sync and Quit"
 # --- 6. PGP Settings (Global defaults) ---
+macro index q "<sync-mailbox><shell-escape>mbsync -c ~/.config/isync/mbsyncrc -a && pkill -RTMIN+1 waybar<enter><quit>" "Sync and Quit"
 set pgp_use_gpg_agent = yes
 set pgp_verify_sig = yes
 set pgp_autosign = no
