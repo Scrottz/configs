@@ -4,7 +4,15 @@ return {
 		"williamboman/mason.nvim",
 		build = ":MasonUpdate",
 		config = function()
-			require("mason").setup()
+			require("mason").setup({
+				ensure_installed = {
+					"prettier",
+					"stylua",
+					"ruff",
+					"yamlfmt",
+					"pyright",
+				},
+			})
 		end,
 	},
 	{
