@@ -122,6 +122,8 @@ export XDG_SESSION_TYPE=wayland
 
 # --- LLM Mainframe Workflow ---
 export LLM_MODEL="gemini/gemini-3.1-flash-lite"
+# export LLM_MODEL="gemini/gemini-3.5-flash"
+
 export LLM_DB="$HOME/.config/io.datasette.llm/logs.db"
 export ACTIVE_LLM_CID=""
 export ACTIVE_LLM_NAME=""
