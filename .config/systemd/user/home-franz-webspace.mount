@@ -1,0 +1,13 @@
+[Unit]
+Description=Mount ALL-INKL Webspace
+After=network-online.target
+Wants=network-online.target
+
+[Mount]
+What=ssh-w016db5f@w016db5f.kasserver.com:/
+Where=/home/franz/webspace
+Type=fuse.sshfs
+Options=defaults,allow_other,_netdev,reconnect,IdentityFile=/home/franz/.ssh/all-inkl,ServerAliveInterval=15
+
+[Install]
+WantedBy=default.target
