@@ -1,0 +1,22 @@
+[options]
+background = 222222
+overlay_font = Monospace:12
+
+[binds]
+j = next
+k = prev
+h = prev
+l = next
+
+i = zoom 1
+o = zoom -1
+
+r = rotate 90
+R = rotate 270
+
+s = slideshow
+p = slideshow
+
+f = fullscreen
+
+q = quit

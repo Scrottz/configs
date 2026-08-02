@@ -5,8 +5,11 @@ set spoolfile = "+posteo/INBOX"
 set header_cache_backend = "lmdb"
 set header_cache = "~/.cache/neomutt/hcache"
 set editor = "nvim"
+set mailcap_path = "~/.config/neomutt/mailcap"
 set wait_key = no
 source "~/.config/neomutt/colors.rc"
+set move = no
+set delete = ask-yes
 
 # --- 2. Workflow & Sync ---
 # Sync on startup (Background process)
@@ -77,11 +80,19 @@ macro index 2 "<change-folder>+main/INBOX<enter>"
 macro index 3 "<change-folder>+spam/INBOX<enter>"
 macro index 4 "<change-folder>+github/INBOX<enter>"
 
+# open mail in nvim
+macro index,pager e "<pipe-message>nvim -<enter>" "Open in nvim"
+
+# Sync Mails
+macro index,pager S "<shell-escape>~/.config/neomutt/sync-mail.sh &<enter>" "Sync Mails"
 # Folder Quick Switch
 mailboxes +posteo/INBOX +posteo/Sent +main/INBOX +main/Gesendet +spam/INBOX +github/INBOX
 macro index C "<change-folder>?<tab>" "Change to any mailbox"
 
-# Syn on quit
+# Url Viewer
+macro index,pager \cb "<pipe-message>urlscan<enter>" "Call urlscan"
+
+
 # --- 6. PGP Settings (Global defaults) ---
 macro index q "<sync-mailbox><shell-escape>mbsync -c ~/.config/isync/mbsyncrc -a && pkill -RTMIN+1 waybar<enter><quit>" "Sync and Quit"
 set pgp_use_gpg_agent = yes
