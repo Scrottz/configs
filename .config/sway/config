@@ -41,7 +41,9 @@ bindsym $mod+Shift+m exec swaymsg move workspace to output $(swaymsg -t get_outp
 
 # Input Configuration
 input "type:keyboard" {
-    xkb_layout de
+    # xkb_layout de
+    # xkb_layout us
+    xkb_layout eu
 }
 
 # Core Bindings
