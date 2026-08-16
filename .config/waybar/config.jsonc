@@ -59,7 +59,7 @@
         "format": "{}",
         "return-type": "json",
         "interval": 2,
-        "on-click": "foot nmtui"
+        "on-click": "kitty nmtui"
     },
 
     "battery": {
