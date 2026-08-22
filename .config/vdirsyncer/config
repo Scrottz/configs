@@ -1,0 +1,18 @@
+[general]
+status_path = "~/.cache/vdirsyncer/status/"
+
+[pair posteo_calendar]
+a = "posteo_remote"
+b = "posteo_local"
+collections = ["default"]
+
+[storage posteo_remote]
+type = "caldav"
+url = "https://posteo.de:8443/calendars/franz.keilholz/"
+username = "franz.keilholz@posteo.de"
+password.fetch = ["command", "secret-tool", "lookup", "service", "mbsync", "user", "franz.keilholz@posteo.de"]
+
+[storage posteo_local]
+type = "filesystem"
+path = "~/.local/share/calendars/default/"
+fileext = ".ics"

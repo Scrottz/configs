@@ -106,7 +106,10 @@ alias spotify='spotify_player'
 # Force a manual bidirectional sync
 alias owncloud-sync='rclone bisync /home/franz/owncloud/ owncloud_fkeilholz: --conflict-resolve newer --check-access --verbose'
 
-    # --- FZF Integration ---
+# kalender sznc -> ikhal -> sync
+alias calendar="vdirsyncer sync && ikhal && vdirsyncer sync"
+
+# --- FZF Integration ---
 # Load key-bindings and completion for fzf.
 [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
 [ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh

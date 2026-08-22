@@ -1,0 +1,22 @@
+[calendars]
+[[posteo]]
+path = ~/.local/share/calendars/default/default
+type = calendar
+
+[locale]
+timeformat = %H:%M
+dateformat = %d.%m.%Y
+longdateformat = %d.%m.%Y
+datetimeformat = %d.%m.%Y %H:%M
+longdatetimeformat = %d.%m.%Y %H:%M
+default_timezone = Europe/Berlin
+firstweekday = 0
+
+[default]
+default_calendar = posteo
+
+[keybindings]
+left = h
+down = j
+up = k
+right = l
