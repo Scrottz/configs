@@ -25,7 +25,8 @@
         "exec": "~/.config/neomutt/mail-count.sh",
         "format": "{}",
         "return-type": "json",
-        "signal": 1
+        "signal": 1,
+        "on-click": "kitty neomutt"
     },
 
     "group/cpu-group": {
