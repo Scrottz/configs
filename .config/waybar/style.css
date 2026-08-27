@@ -1,40 +1,49 @@
 * {
-    font-family: "JetBrainsMono Nerd Font", monospace;
-    font-size: 13px;
+  font-family: "JetBrainsMono Nerd Font", monospace;
+  font-size: 13px;
 }
 
 window#waybar {
-    background: transparent;
+  background: transparent;
 }
 
 #waybar {
-    background-color: rgba(0, 0, 0, 0.8);
-    border-radius: 10px;
-    color: #00ff00; /* Dein Grün */
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 10px;
+  color: #00ff00; /* Dein Grün */
 }
 
 /* Modul-Styling */
 #workspaces button,
 #custom-mail,
-#cpu, #temperature, #memory, #network,
-#battery, #clock {
-    padding: 0 10px;
-    color: #00ff00;
+#cpu,
+#temperature,
+#memory,
+#network,
+#battery,
+#clock {
+  padding: 0 10px;
+  color: #00ff00;
 }
 
 #custom-mail {
-    min-width: 200px;
-    padding: 0 20px;
-    font-weight: bold;
+  min-width: 200px;
+  padding: 0 20px;
+  font-weight: bold;
 }
 
 /* Gruppen-Styling */
 .modules-right > widget > box {
-    background: rgba(255, 255, 255, 0.05);
-    margin: 4px;
-    border-radius: 5px;
+  background: rgba(255, 255, 255, 0.05);
+  margin: 4px;
+  border-radius: 5px;
 }
 
 #temperature.critical {
-    color: #ff0000;
+  color: #ff0000;
+}
+
+#workspaces button.urgent {
+  background-color: #ff0000;
+  color: #ffffff;
 }

@@ -7,5 +7,5 @@ MONITOR=$(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name')
 grim -o "$MONITOR" /tmp/screen.png
 convert /tmp/screen.png -blur 0x8 /tmp/screen.png
 
-# 3. Just lock the screen. That's it.
+# 3. Lock the screen
 swaylock -i /tmp/screen.png --clock --indicator
