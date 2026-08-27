@@ -96,3 +96,7 @@ end, { desc = "Debug: Toggle UI" })
 
 -- Venv Selector
 vim.keymap.set("n", "<leader>vs", "<cmd>VenvSelect<cr>", { desc = "Python: Select VirtualEnv" })
+
+vim.keymap.set("n", "<leader>o", function()
+	require("dropbar.api").pick()
+end, { desc = "Dropbar: Pick symbol" })

@@ -5,6 +5,7 @@ return {
 		priority = 1000,
 		config = function()
 			require("onedark").setup({ style = "darker", transparent = true })
+			vim.cmd.colorscheme("onedark")
 		end,
 	},
 	{
@@ -14,33 +15,48 @@ return {
 	},
 	{
 		"nvim-lualine/lualine.nvim",
-		lazy = false,
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		event = "VeryLazy",
 		config = function()
 			require("lualine").setup({
 				options = {
-					theme = "auto",
-					section_separators = { left = "", right = "" },
-					component_separators = { left = "", right = "" },
+					theme = "onedark",
+					component_separators = { left = "", right = "" },
+					section_separators = { left = "", right = "" },
+					globalstatus = true,
 				},
 				sections = {
 					lualine_a = { "mode" },
-					lualine_b = { "branch", "diff", "diagnostics" },
-					lualine_c = { "filename" },
-					lualine_x = { "encoding", "fileformat", "filetype" },
-					lualine_y = { "progress" },
+					lualine_b = { "branch", { "diff", symbols = { added = " +", modified = " ~", removed = " -" } } },
+					lualine_c = { { "filename", path = 1 } },
+					lualine_x = { "diagnostics", "filetype" },
+					lualine_y = {},
 					lualine_z = { "location" },
 				},
 			})
 		end,
 	},
-
 	{
-		"SmiteshP/nvim-navic",
-		dependencies = { "neovim/nvim-lspconfig" },
+		"Bekaboo/dropbar.nvim",
+		event = "BufReadPre",
 		config = function()
-			require("nvim-navic").setup({
-				lsp = { auto_attach = true },
-				highlight = true,
+			local dropbar = require("dropbar")
+			dropbar.setup({
+				bar = {
+					update_interval = 250,
+					sources = function(buf, _)
+						local sources = require("dropbar.sources")
+						-- Nutzt LSP, wenn verfügbar, ansonsten Treesitter (perfekt für dich!)
+						return {
+							sources.path,
+							sources.lsp,
+							sources.treesitter,
+						}
+					end,
+				},
+				win_configs = {
+					border = "rounded",
+				},
 			})
 		end,
 	},
