@@ -69,11 +69,12 @@ bind pager G bottom
 
 # --- Search Navigation (Vim-like) ---
 bind index n search-next
-bind index N search-opposite   # Shift+n ist jetzt "vorheriges Suchergebnis"
+bind index N search-opposite
 
-# --- Markierungs-Shortcuts (Klar getrennt) ---
+# --- Markierungs-Shortcuts ---
 macro index R "<clear-flag>N<sync-mailbox>" "Mark as read"
 macro index u "<set-flag>N<sync-mailbox>" "Mark as unread"
+
 # Account Navigation
 macro index 1 "<change-folder>+posteo/INBOX<enter>"
 macro index 2 "<change-folder>+main/INBOX<enter>"
@@ -85,6 +86,7 @@ macro index,pager e "<pipe-message>nvim -<enter>" "Open in nvim"
 
 # Sync Mails
 macro index,pager S "<shell-escape>~/.config/neomutt/sync-mail.sh &<enter>" "Sync Mails"
+
 # Folder Quick Switch
 mailboxes +posteo/INBOX +posteo/Sent +main/INBOX +main/Gesendet +spam/INBOX +github/INBOX
 macro index C "<change-folder>?<tab>" "Change to any mailbox"
@@ -94,7 +96,6 @@ macro index,pager \cb "<pipe-message>urlscan<enter>" "Call urlscan"
 
 
 # --- 6. PGP Settings (Global defaults) ---
-macro index q "<sync-mailbox><shell-escape>mbsync -c ~/.config/isync/mbsyncrc -a && pkill -RTMIN+1 waybar<enter><quit>" "Sync and Quit"
 set pgp_use_gpg_agent = yes
 set pgp_verify_sig = yes
 set pgp_autosign = no
@@ -107,3 +108,5 @@ alternative_order text/plain text/enriched text/html
 # --- 8. Mailboxses ---
 mailboxes +posteo/INBOX +posteo/Sent +main/INBOX +main/Gesendet +spam/INBOX +spam/Gesendet +github/INBOX +github/Gesendet
 
+# --- 9. Exiting ---
+macro index q "<sync-mailbox><shell-escape>mbsync -c ~/.config/isync/mbsyncrc -a && pkill -RTMIN+1 waybar<enter><quit>" "Sync and Quit"
