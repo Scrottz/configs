@@ -20,12 +20,11 @@ set mail_check = 0
 set beep_new = no
 
 # --- 3. UI & Display ---
-# Disable threading for a flat, chronological list
-set sort = reverse-date
-set sort_aux = reverse-date
+set sort = threads
+set sort_aux = reverse-last-date
 
 # Clean index: Index, Status, Date, Sender(20 chars), Subject
-set index_format = "%4C %Z %{%d.%m.%Y}  %-20.20L  %s"
+set index_format = "%4C %Z %{%d.%m.%Y} %?X?#& ? %-20.20L  %s"
 
 # Minimalistic status bar
 set status_format = " %f | %m Mails | %n Neu "
@@ -55,7 +54,6 @@ bind index k previous-entry
 bind index d delete-message
 bind index u undelete-message
 bind index gg first-entry
-
 
 # Pager Movement (The Zen Scroll)
 bind pager j next-line
