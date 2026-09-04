@@ -64,22 +64,14 @@ mainframe() {
     else
         tmux new-session -d -s "$session" -n " "
 
-        # 1. Rechts splitten
         tmux split-window -h -t "$session"
 
-        # 2. Das rechte Pane (Index 1) in drei unterteilen
-        # Wir splitten 1 zu 2, dann 2 zu 3
         tmux split-window -v -t "$session:0.1"
         tmux split-window -v -t "$session:0.2"
 
-        # 3. Jetzt die Größen (von oben nach unten)
-        # Das oberste rechte Pane (Index 1) bekommt 43% Gesamthöhe
-        tmux resize-pane -t "$session:0.1" -y 43%
-        # Das mittlere rechte Pane (Index 2) bekommt auch 43%
-        tmux resize-pane -t "$session:0.2" -y 43%
-        # Das unterste Pane (Index 3) bekommt den Rest automatisch
+        tmux resize-pane -t "$session:0.1" -y 38%
+        tmux resize-pane -t "$session:0.2" -y 30%
 
-        # Fokus auf das linke Hauptpane
         tmux select-pane -t "$session:0.0"
         tmux attach-session -t "$session"
     fi

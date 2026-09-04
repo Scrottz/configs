@@ -1,0 +1,15 @@
+[Default Applications]
+x-scheme-handler/discord=vesktop.desktop
+x-scheme-handler/discord-1222229231367487539=discord-1222229231367487539.desktop
+text/html=firefox.desktop
+x-scheme-handler/http=firefox.desktop
+x-scheme-handler/https=firefox.desktop
+x-scheme-handler/about=firefox.desktop
+x-scheme-handler/unknown=firefox.desktop
+
+image/jpeg=imv.desktop
+image/jpg=imv.desktop
+image/png=imv.desktop
+image/webp=imv.desktop
+
+application/pdf=org.pwmt.zathura.desktop
