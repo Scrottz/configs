@@ -96,7 +96,8 @@ alias cat='bat --paging=never'
 alias spotify='spotify_player'
 
 # Force a manual bidirectional sync
-alias owncloud-sync='rclone bisync /home/franz/owncloud/ owncloud_fkeilholz: --conflict-resolve newer --check-access --verbose'
+alias owncloud-sync='rclone bisync /home/franz/owncloud/ owncloud_fkeilholz:/ --verbose'
+alias owncloud-resync='rclone bisync /home/franz/owncloud/ owncloud_fkeilholz:/ --resync --verbose'
 
 # kalender sznc -> ikhal -> sync
 alias calendar="vdirsyncer sync && ikhal && vdirsyncer sync"
