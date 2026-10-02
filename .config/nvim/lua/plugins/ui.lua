@@ -46,7 +46,6 @@ return {
 					update_interval = 250,
 					sources = function(buf, _)
 						local sources = require("dropbar.sources")
-						-- Nutzt LSP, wenn verfügbar, ansonsten Treesitter (perfekt für dich!)
 						return {
 							sources.path,
 							sources.lsp,
