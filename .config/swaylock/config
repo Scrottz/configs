@@ -1,0 +1,15 @@
+ring-color=00ff00
+key-hl-color=00ff00
+inside-color=000000
+line-color=000000
+separator-color=000000
+text-color=00ff00
+
+# Design-Optionen
+indicator-radius=100
+indicator-thickness=7
+font=UbuntuMono Nerd Font
+show-failed-attempts
+
+clock
+datestr=%d.%m.%Y
