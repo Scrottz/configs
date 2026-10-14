@@ -6,7 +6,7 @@
 stty susp undef
 
 # Force Firefox to be compatible to waylad (marking texts works again)
-MOZ_ENABLE_WAYLAND=1 firefox
+export MOZ_ENABLE_WAYLAND=1
 
 # --- Default editors ---
 export EDITOR=nvim
