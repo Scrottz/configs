@@ -7,7 +7,8 @@
     "modules-left": [
         "sway/workspaces",
         "group/cpu-group",
-        "memory"
+        "memory",
+        "bluetooth"
      ],
     "modules-center": ["custom/mail"],
     "modules-right": [
@@ -50,6 +51,13 @@
         "interval": 2
     },
 
+    "bluetooth": {
+        "format": " {status}",
+        "format-disabled": "", 
+        "format-connected": " {device_alias} {device_battery_percentage}%",
+        "on-click": "kitty bluetui"
+    },
+
     "group/net-group": {
         "orientation": "horizontal",
         "modules": ["network"]
@@ -72,6 +80,8 @@
     },
 
     "clock": {
-        "format": "{:%d.%m.%Y %H:%M}"
+        "interval": 1,
+        "format": "{:%d.%m.%Y %H:%M:%S}",
+        "on-click": "kitty sh -c 'vdirsyncer sync && ikhal && vdirsyncer sync'"
     }
 }
