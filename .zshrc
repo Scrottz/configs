@@ -96,7 +96,7 @@ alias ssh-pi3="ssh franz@192.168.178.2"
 # Arch-specific mappings for command line tools.
 alias cat='bat --paging=never'
 
-alias spotify='spotify_player'
+alias spotify='spotatui'
 
 # Force a manual bidirectional sync
 alias owncloud-sync='rclone bisync /home/franz/owncloud/ owncloud_fkeilholz:/ --verbose'
