@@ -84,9 +84,8 @@ return {
 		opts = {
 			columns = {
 				"icon",
-				"permissions",
 				"size",
-				"mtime",
+				{ "mtime", format = "%Y-%m-%d %H:%M" },
 			},
 			view_options = {
 				show_hidden = true,
