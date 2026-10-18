@@ -33,9 +33,11 @@ end
 keymap("n", "<leader>ff", function()
 	require("fzf-lua").files({ cwd = get_project_root() })
 end, { desc = "Find Files", silent = true })
+
 keymap("n", "<leader>fg", function()
 	require("fzf-lua").live_grep({ cwd = get_project_root() })
 end, { desc = "Live Grep", silent = true })
+
 keymap("n", "<leader>fs", "<cmd>FzfLua lsp_document_symbols<cr>", { desc = "Find Symbols (File)", silent = true })
 keymap("n", "<leader>fS", function()
 	require("fzf-lua").lsp_workspace_symbols({ cwd = get_project_root() })
