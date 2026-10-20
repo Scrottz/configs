@@ -6,6 +6,11 @@ set $green #00FF00
 set $black #000000
 set $darkgreen #003300
 
+#workspace icon config
+
+font pango:monospace 10
+
+
 # window colloring
 client.focused          $green    $black    $green    $green    $green
 client.focused_inactive $darkgreen $black    $darkgreen $darkgreen $darkgreen
@@ -17,10 +22,6 @@ client.urgent           #FF0000   #000000   #FF0000    #FF0000   #FF0000
 # Monitor Setup
 set $laptop eDP-1
 set $monitor HDMI-A-1
-
-# Set solid black background
-output $laptop bg #000000 solid_color
-output $monitor bg #000000 solid_color
 
 exec_always swaybg -i ~/.config/sway/wallpaper.png -m fill
 
@@ -117,3 +118,4 @@ bar {
 include /etc/sway/config.d/*
 
 exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=secrets
+exec_always ~/.local/share/workspace-icon-daemon/venv/bin/workspace-icon-daemon

@@ -3,6 +3,10 @@
   font-size: 13px;
 }
 
+* {
+  font-family: WorkspaceIconDaemon, sans-serif;
+}
+
 window#waybar {
   background: transparent;
 }
