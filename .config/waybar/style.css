@@ -3,9 +3,9 @@
   font-size: 13px;
 }
 
-* {
-  font-family: WorkspaceIconDaemon, sans-serif;
-}
+/* * { */
+/*     font-family: WorkspaceIconDaemon, sans-serif; */
+/* } */
 
 window#waybar {
   background: transparent;
@@ -14,7 +14,7 @@ window#waybar {
 #waybar {
   background-color: rgba(0, 0, 0, 0.8);
   border-radius: 10px;
-  color: #00ff00; /* Dein Grün */
+  color: #00ff00;
 }
 
 /* Modul-Styling */

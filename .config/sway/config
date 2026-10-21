@@ -7,17 +7,13 @@ set $black #000000
 set $darkgreen #003300
 
 #workspace icon config
-
 font pango:monospace 10
-
 
 # window colloring
 client.focused          $green    $black    $green    $green    $green
 client.focused_inactive $darkgreen $black    $darkgreen $darkgreen $darkgreen
 client.unfocused        $black    $black    $darkgreen $black    $darkgreen
 client.urgent           #FF0000   #000000   #FF0000    #FF0000   #FF0000
-
-# window clow setting
 
 # Monitor Setup
 set $laptop eDP-1
@@ -43,7 +39,6 @@ bindsym $mod+Shift+m exec swaymsg move workspace to output $(swaymsg -t get_outp
 # Input Configuration
 input "type:keyboard" {
     # xkb_layout de
-    # xkb_layout us
     xkb_layout eu
 }
 
@@ -101,10 +96,10 @@ bindsym $mod+Shift+space floating toggle
 
 # Resize Mode
 mode "resize" {
-    bindsym h resize shrink width 10px
-    bindsym j resize grow height 10px
-    bindsym k resize shrink height 10px
-    bindsym l resize grow width 10px
+    bindsym h resize shrink width 25px
+    bindsym j resize grow height 25px
+    bindsym k resize shrink height 25px
+    bindsym l resize grow width 25px
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
