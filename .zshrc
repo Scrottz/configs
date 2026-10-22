@@ -59,24 +59,36 @@ PROMPT='%F{244}[ %F{34}%n%f%F{244}@%F{78}%m %F{244}: %F{36}%~ %F{244}] $MODE_IND
 export PATH="$HOME/.local/bin:$PATH"
 
 # --- Custom Functions ---
+
 mainframe() {
     local session="mainframe"
+    local resurrect_file="$HOME/.local/share/tmux/resurrect/last"
 
     if tmux has-session -t "$session" 2>/dev/null; then
+        # Session already exists -> Attach to it
         tmux attach-session -t "$session"
     else
-        tmux new-session -d -s "$session" -n " "
+        # Check if a tmux-resurrect save file exists
+        if [ -f "$resurrect_file" ]; then
+            # Backup found (e.g., after reboot or dotfile sync) -> Start default session
+            # and let tmux-continuum / tmux-resurrect restore the saved state.
+            tmux new-session -d -s "$session"
+            tmux attach-session -t "$session"
+        else
+            # First launch on a new system (no backup file found) -> Force initial 4-pane layout
+            tmux new-session -d -s "$session" -n " "
 
-        tmux split-window -h -t "$session"
+            tmux split-window -h -t "$session"
 
-        tmux split-window -v -t "$session:0.1"
-        tmux split-window -v -t "$session:0.2"
+            tmux split-window -v -t "$session:0.1"
+            tmux split-window -v -t "$session:0.2"
 
-        tmux resize-pane -t "$session:0.1" -y 38%
-        tmux resize-pane -t "$session:0.2" -y 30%
+            tmux resize-pane -t "$session:0.1" -y 38%
+            tmux resize-pane -t "$session:0.2" -y 30%
 
-        tmux select-pane -t "$session:0.0"
-        tmux attach-session -t "$session"
+            tmux select-pane -t "$session:0.0"
+            tmux attach-session -t "$session"
+        fi
     fi
 }
 
