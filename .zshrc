@@ -131,8 +131,9 @@ export XDG_CURRENT_DESKTOP=sway
 export XDG_SESSION_TYPE=wayland
 
 # --- LLM Mainframe Workflow ---
-export LLM_MODEL="gemini/gemini-3.1-flash-lite"
+# export LLM_MODEL="gemini/gemini-3.1-flash-lite"
 # export LLM_MODEL="gemini/gemini-3.5-flash"
+export LLM_MODEL="openrouter/nvidia/nemotron-3-ultra-550b-a55b:free"
 
 export LLM_DB="$HOME/.config/io.datasette.llm/logs.db"
 export ACTIVE_LLM_CID=""
