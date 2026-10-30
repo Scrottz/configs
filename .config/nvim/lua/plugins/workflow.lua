@@ -59,57 +59,6 @@ return {
 			{ "<leader>xq", "<cmd>Trouble qflist toggle<cr>", desc = "Toggle Quickfix List" },
 		},
 	},
-    {
-        "petertriho/nvim-scrollbar",
-        event = "BufReadPre",
-        dependencies = { "lewis6991/gitsigns.nvim" },
-        config = function()
-            -- 1. Core Scrollbar Setup (UI only)
-            require("scrollbar").setup({
-                show = true,
-                handle = {
-                    show = true,
-                    -- Use highlight group instead of hardcoded color for theme compatibility
-                    highlight = "ScrollbarHandle",
-                },
-                marks = {
-                    Search = { highlight = "Search" },
-                    Error = { highlight = "DiagnosticError" },
-                    Warn = { highlight = "DiagnosticWarn" },
-                    Info = { highlight = "DiagnosticInfo" },
-                    Hint = { highlight = "DiagnosticHint" },
-                },
-                excluded_filetypes = {
-                    "prompt",
-                    "TelescopePrompt",
-                    "noice",
-                    "neo-tree",
-                    "oil",
-                    "dropbar_menu",
-                },
-                excluded_buftypes = { "terminal", "nofile" },
-            })
-
-            -- 2. Register Handlers separately (Required in v2 API)
-            -- GitSigns Handler: Shows added/changed/deleted marks
-            local ok_gitsigns, gitsigns_handler = pcall(require, "scrollbar.handlers.gitsigns")
-            if ok_gitsigns then
-                gitsigns_handler.setup()
-            end
-
-            -- Diagnostic Handler: Shows error/warn marks
-            local ok_diag, diag_handler = pcall(require, "scrollbar.handlers.diagnostic")
-            if ok_diag then
-                diag_handler.setup()
-            end
-
-            -- Search Handler: Shows search matches in scrollbar
-            local ok_search, search_handler = pcall(require, "scrollbar.handlers.search")
-            if ok_search then
-                search_handler.setup()
-            end
-        end,
-    },
 	{
 		"neovim/nvim-lspconfig",
 		lazy = false,
