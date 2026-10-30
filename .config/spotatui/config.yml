@@ -45,6 +45,7 @@ keybindings:
   like_track: F
   generate_recap: R
 behavior:
+  language: auto
   seek_milliseconds: 5000
   volume_increment: 10
   tick_rate_milliseconds: 250
@@ -70,7 +71,8 @@ behavior:
   playing_icon: ▶
   paused_icon: ⏸
   set_window_title: true
-  visualizer_style: Cava
+  visualizer_style: Winamp
+  player_bar_visualizer: spectrum
   relay_server_url: wss://spotatui-party.spotatui.workers.dev/ws
   stop_after_current_track: false
   startup_behavior: continue
@@ -111,6 +113,9 @@ behavior:
   subsonic_username: null
   subsonic_password: null
   ytdlp_path: null
+  playback_engine: librespot
+  soloist_path: null
+  soloist_audio_quality: lossless
   qobuz_quality: 6
   gauge_filled_icon: ⣿
   gauge_unfilled_icon: ⣉
