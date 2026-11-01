@@ -13,6 +13,10 @@ ZSH_AUTOSUGGEST_STRATEGY=(history)
 bindkey -M viins '^f' autosuggest-accept
 bindkey -M vicmd '^f' autosuggest-accept
 
+# fzf-tab: replaces the Tab completion menu with an fzf selection.
+[ -f "$PLUGIN_DIR/fzf-tab/fzf-tab.plugin.zsh" ] && \
+    source "$PLUGIN_DIR/fzf-tab/fzf-tab.plugin.zsh"
+
 # Syntax highlighting: colors valid commands green, unknown ones red while typing.
 [ -f "$PLUGIN_DIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && \
     source "$PLUGIN_DIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
