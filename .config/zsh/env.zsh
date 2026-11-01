@@ -22,6 +22,6 @@ export XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
 
 # --- fzf configuration ---
 # Exclude git/cache noise, include hidden files. Used by fzf key bindings and completion.
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --no-ignore --exclude .cache'
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .cache --exclude .git --exclude node_modules --exclude webspace'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_CTRL_T_OPTS="--preview 'bat --style=numbers --color=always --line-range :50 {}'"
