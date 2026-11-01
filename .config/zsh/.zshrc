@@ -3,7 +3,7 @@
 
 ZSH_DIR="${ZDOTDIR:-$HOME/.config/zsh}"
 
-[ -f "$ZSH_DIR/options.zsh" ]     && source "$ZSH_DIR/options.zsh"
+[ -f "$ZSH_DIR/options.zsh" ] && source "$ZSH_DIR/options.zsh"
 [ -f "$ZSH_DIR/keybindings.zsh" ] && source "$ZSH_DIR/keybindings.zsh"
 [ -f "$ZSH_DIR/prompt.zsh" ] && source "$ZSH_DIR/prompt.zsh"
 [ -f "$ZSH_DIR/completion.zsh" ] && source "$ZSH_DIR/completion.zsh"

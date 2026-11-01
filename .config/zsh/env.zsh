@@ -16,8 +16,9 @@ export VISUAL=nvim
 # --- Wayland / Sway ---
 # Force Firefox to use Wayland (marking text works again).
 export MOZ_ENABLE_WAYLAND=1
-export XDG_CURRENT_DESKTOP=sway
-export XDG_SESSION_TYPE=wayland
+: ${XDG_CURRENT_DESKTOP:=sway}
+: ${XDG_SESSION_TYPE:=wayland}
+export XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
 
 # --- fzf configuration ---
 # Exclude git/cache noise, include hidden files. Used by fzf key bindings and completion.

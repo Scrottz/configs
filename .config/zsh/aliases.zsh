@@ -1,8 +1,5 @@
 # General shell aliases. The tmux alias lives in tmux.zsh.
 
-# Manage dotfiles via the bare git repository.
-alias dotfiles='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
-
 # Quick access to the neovim/config directory.
 alias cfg='nvim ~/.config'
 

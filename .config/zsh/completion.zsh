@@ -9,3 +9,6 @@
 autoload -Uz compinit
 compinit -d "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump"
 
+# The dotfiles alias wraps git with $HOME as work tree. Git's completion would
+# list untracked files across all of $HOME, which is slow. Use file completion instead.
+compdef _files dotfiles
