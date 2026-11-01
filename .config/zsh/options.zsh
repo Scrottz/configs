@@ -18,3 +18,13 @@ setopt EXTENDED_HISTORY     # store timestamp and duration per command
 # --- Prompt ---
 # Needed so prompt strings with $(...) or variables are expanded on every redraw.
 setopt PROMPT_SUBST
+
+# Do not save commands starting with "q " (LLM chat calls) to the history file.
+# zshaddhistory runs before each command is stored. Return 1 to keep, 0 to drop.
+zshaddhistory() {
+    local cmd=${1%$'\n'}
+    case $cmd in
+        q|q\ *|files-to-prompt*) return 1 ;;  # drop: LLM calls and prompt builders
+    esac
+    return 0                                  # keep everything else
+}
