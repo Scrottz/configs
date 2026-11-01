@@ -22,6 +22,7 @@ MODE_INDICATOR="%F{78}[INSERT]%f"
 # Reset to INSERT when a new line starts.
 zle-line-init() {
   MODE_INDICATOR="%F{78}[INSERT]%f"
+  printf '\e[5 q'
   zle reset-prompt
 }
 
@@ -29,8 +30,10 @@ zle-line-init() {
 zle-keymap-select() {
   if [[ $KEYMAP == vicmd ]]; then
     MODE_INDICATOR="%F{202}[NORMAL]%f"
+    printf '\e[1 q'
   else
     MODE_INDICATOR="%F{78}[INSERT]%f"
+    printf '\e[5 q'
   fi
   zle reset-prompt
 }
