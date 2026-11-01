@@ -3,6 +3,9 @@
 
 bindkey -v
 
+# Faster switchung modes (instert/normal) 
+export KEYTIMEOUT=1
+
 # Backspace works in both modes.
 bindkey -M viins '^?' backward-delete-char
 bindkey -M vicmd '^?' backward-delete-char

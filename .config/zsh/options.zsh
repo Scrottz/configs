@@ -9,9 +9,11 @@ HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE="$HOME/.config/zsh/.zsh_history"
 
-setopt INC_APPEND_HISTORY   # write history immediately, not on shell exit
+setopt SHARE_HISTORY        # share history between all open shells 
 setopt HIST_IGNORE_ALL_DUPS # drop older duplicates
+setopt HIST_IGNORE_SPACE    # commands starting with a space are not saved
 setopt HIST_REDUCE_BLANKS   # normalize whitespace in saved commands
+setopt EXTENDED_HISTORY     # store timestamp and duration per command
 
 # --- Prompt ---
 # Needed so prompt strings with $(...) or variables are expanded on every redraw.
