@@ -1,0 +1,6 @@
+[Unit]
+Description=Periodic tmux-resurrect save
+
+[Service]
+Type=oneshot
+ExecStart=/home/franz/.config/tmux/plugins/tmux-resurrect/scripts/save.sh
