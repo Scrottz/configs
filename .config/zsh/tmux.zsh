@@ -7,32 +7,21 @@ alias tmux="tmux -f ~/.config/tmux/tmux.conf"
 
 mainframe() {
     local session="mainframe"
-    local resurrect_file="$HOME/.local/share/tmux/resurrect/last"
 
-    if tmux has-session -t "$session" 2>/dev/null; then
-        # Session already exists -> attach to it.
-        tmux attach-session -t "$session"
+    if ! tmux has-session -t "$session" 2>/dev/null; then
+        local p0 p1 p2 p3
+        p0=$(tmux new-session -d -s "$session" -n " " -P -F '#{pane_id}')
+        p1=$(tmux split-window -h -t "$p0" -P -F '#{pane_id}')
+        p2=$(tmux split-window -v -t "$p1" -P -F '#{pane_id}')
+        p3=$(tmux split-window -v -t "$p2" -P -F '#{pane_id}')
+        tmux resize-pane -t "$p2" -y 38%
+        tmux resize-pane -t "$p3" -y 30%
+        tmux select-pane -t "$p0"
+    fi
+
+    if [[ -n $TMUX ]]; then
+        tmux switch-client -t "$session"
     else
-        if [ -f "$resurrect_file" ]; then
-            # Save file found (e.g. after reboot): start the session and let
-            # tmux-continuum / tmux-resurrect restore the saved state.
-            tmux new-session -d -s "$session"
-            tmux attach-session -t "$session"
-        else
-            # First launch on a new system: build the initial 4-pane layout.
-            tmux new-session -d -s "$session" -n " "
-
-            tmux split-window -h -t "$session"
-
-            tmux split-window -v -t "$session:0.1"
-            tmux split-window -v -t "$session:0.2"
-
-            # Pane indices are fixed by the split order above.
-            tmux resize-pane -t "$session:0.1" -y 38%
-            tmux resize-pane -t "$session:0.2" -y 30%
-
-            tmux select-pane -t "$session:0.0"
-            tmux attach-session -t "$session"
-        fi
+        tmux attach-session -t "$session"
     fi
 }
